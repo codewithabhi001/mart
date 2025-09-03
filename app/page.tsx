@@ -1,18 +1,30 @@
 import Header from '@/components/header/header';
-import HeroSection from '@/components/home/hero-section';
-import CategorySection from '@/components/home/category-section';
-import TrendingProducts from '@/components/home/trending-products';
-import DealsSection from '@/components/home/deals-section';
+import SplashScreen from '@/components/splash/splash-screen';
+import HomePage from '@/components/home/home-page';
 import Footer from '@/components/footer/footer';
+import { useAuth } from '@/lib/context/auth-context';
+import { useState, useEffect } from 'react';
 
 export default function Home() {
+  const [showSplash, setShowSplash] = useState(true);
+  const { isLoading } = useAuth();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSplash(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (showSplash || isLoading) {
+    return <SplashScreen />;
+  }
+
   return (
     <main className="min-h-screen bg-cream-light">
       <Header />
-      <HeroSection />
-      <CategorySection />
-      <TrendingProducts />
-      <DealsSection />
+      <HomePage />
       <Footer />
     </main>
   );

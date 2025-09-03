@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { MapPin, Search, ShoppingCart, User, Menu } from 'lucide-react';
+import { MapPin, Search, ShoppingCart, User, Menu, Mic, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -15,9 +15,28 @@ import UserMenu from './user-menu';
 export default function Header() {
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isListening, setIsListening] = useState(false);
   const { itemCount } = useCart();
   const { user } = useAuth();
   const { currentLocation, isServiceAvailable } = useLocation();
+
+  const startVoiceSearch = () => {
+    if ('webkitSpeechRecognition' in window) {
+      const recognition = new (window as any).webkitSpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.lang = 'en-US';
+
+      recognition.onstart = () => setIsListening(true);
+      recognition.onend = () => setIsListening(false);
+      recognition.onresult = (event: any) => {
+        const transcript = event.results[0][0].transcript;
+        setSearchQuery(transcript);
+      };
+
+      recognition.start();
+    }
+  };
 
   return (
     <>
@@ -59,11 +78,30 @@ export default function Header() {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="pl-10 h-10 bg-gray-50 border-gray-200 focus:border-primary"
                 />
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className={`absolute right-1 top-1/2 transform -translate-y-1/2 h-8 w-8 p-0 ${
+                    isListening ? 'text-red-500 animate-pulse' : 'text-gray-400'
+                  }`}
+                  onClick={startVoiceSearch}
+                >
+                  <Mic className="w-4 h-4" />
+                </Button>
               </div>
             </div>
 
             {/* Right Actions */}
             <div className="flex items-center space-x-4">
+              {/* Wishlist */}
+              {user && (
+                <Link href="/wishlist">
+                  <Button variant="ghost" size="sm" className="relative p-2">
+                    <Heart className="w-6 h-6" />
+                  </Button>
+                </Link>
+              )}
+
               {/* Cart */}
               <Link href="/cart">
                 <Button variant="ghost" size="sm" className="relative p-2">
