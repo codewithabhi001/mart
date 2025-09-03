@@ -6,9 +6,9 @@ import { User } from '@/lib/types';
 interface AuthContextType {
   user: User | null;
   isLoading: boolean;
-  login: (phone: string, otp: string) => Promise<boolean>;
+  login: (identifier: string, otp: string) => Promise<boolean>;
   logout: () => void;
-  sendOtp: (phone: string) => Promise<boolean>;
+  sendOtp: (identifier: string) => Promise<boolean>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -29,23 +29,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setIsLoading(false);
   }, []);
 
-  const sendOtp = async (phone: string): Promise<boolean> => {
+  const sendOtp = async (identifier: string): Promise<boolean> => {
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1000));
-    console.log(`OTP sent to ${phone}: 1234`); // Demo OTP
+    console.log(`OTP sent to ${identifier}: 1234`); // Demo OTP
     return true;
   };
 
-  const login = async (phone: string, otp: string): Promise<boolean> => {
+  const login = async (identifier: string, otp: string): Promise<boolean> => {
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1000));
     
     if (otp === '1234') { // Demo OTP
       const newUser: User = {
         id: Date.now().toString(),
-        phone,
+        phone: identifier.includes('@') ? '+91 9876543210' : identifier,
         name: 'John Doe',
-        email: 'john@example.com',
+        email: identifier.includes('@') ? identifier : 'john@example.com',
         addresses: [
           {
             id: '1',
