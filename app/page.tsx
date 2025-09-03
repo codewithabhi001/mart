@@ -1,3 +1,4 @@
+'use client';
 import Header from '@/components/header/header';
 import SplashScreen from '@/components/splash/splash-screen';
 import HomePage from '@/components/home/home-page';

@@ -61,10 +61,9 @@ export default function Footer() {
               </div>
               <div className="flex items-start space-x-2">
                 <MapPin className="w-4 h-4 mt-1" />
-            <Link href="/returns" className="block text-gray-400 hover:text-white">Returns & Refunds</Link>
-            <Link href="/privacy" className="block text-gray-400 hover:text-white">Privacy Policy</Link>
-            <Link href="/terms" className="block text-gray-400 hover:text-white">Terms & Conditions</Link>
-            <Link href="/about" className="block text-gray-400 hover:text-white">About Us</Link>
+                <span>123 Grocery St, Food City, FC 12345</span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -74,6 +73,4 @@ export default function Footer() {
       </div>
     </footer>
   );
-}
-  )
 }

@@ -17,3 +17,12 @@ export default function ProductPage({ params }: ProductPageProps) {
     </main>
   );
 }
+
+export function generateStaticParams() {
+  // Replace with your actual product IDs
+  return [
+    { id: '1' },
+    { id: '2' },
+    { id: '3' },
+  ];
+}
