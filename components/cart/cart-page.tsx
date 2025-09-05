@@ -202,13 +202,15 @@ export default function CartPage() {
               </div>
             </div>
 
-            <Button 
-              size="lg" 
-              className="w-full mt-6 bg-primary hover:bg-primary/90"
-              disabled={items.length === 0}
-            >
-              Proceed to Checkout
-            </Button>
+            <Link href="/checkout">
+              <Button
+                size="lg"
+                className="w-full mt-6 bg-primary-green hover:bg-primary-green/90 text-white"
+                disabled={items.length === 0}
+              >
+                Proceed to Checkout
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
