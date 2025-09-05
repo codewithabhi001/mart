@@ -84,7 +84,7 @@ export default function AuthPage() {
             <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center">
               <ShoppingCart className="w-6 h-6 text-primary" />
             </div>
-            <h1 className="text-3xl font-bold text-white">GroceryMart</h1>
+            <h1 className="text-3xl font-bold text-white">ILB MART</h1>
           </div>
           <p className="text-cream-medium">Fresh groceries delivered in minutes</p>
         </div>
