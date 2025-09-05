@@ -103,7 +103,7 @@ export default function Header() {
               {/* Wishlist */}
               {user && (
                 <Link href="/wishlist">
-                  <Button variant="ghost" size="sm" className="relative p-3 hover:bg-purple-50 hover:text-purple-600 rounded-xl">
+                  <Button variant="ghost" size="sm" className="relative p-3 hover:bg-green-50 hover:text-green-600 rounded-xl">
                     <Heart className="w-5 h-5" />
                   </Button>
                 </Link>
@@ -111,7 +111,7 @@ export default function Header() {
 
               {/* Cart */}
               <Link href="/cart">
-                <Button variant="ghost" size="sm" className="relative p-3 hover:bg-purple-50 hover:text-purple-600 rounded-xl">
+                <Button variant="ghost" size="sm" className="relative p-3 hover:bg-green-50 hover:text-green-600 rounded-xl">
                   <ShoppingCart className="w-5 h-5" />
                   {itemCount > 0 && (
                     <Badge 
@@ -157,7 +157,7 @@ export default function Header() {
           <div className="md:hidden pb-3">
             <Button
               variant="ghost"
-              className="flex items-center space-x-2 text-gray-600 hover:text-purple-600 w-full justify-start"
+              className="flex items-center space-x-2 text-gray-700 hover:text-green-600 w-full justify-start"
               onClick={() => setIsLocationModalOpen(true)}
             >
               <MapPin className="w-4 h-4" />
