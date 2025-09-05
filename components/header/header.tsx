@@ -18,6 +18,7 @@ export default function Header() {
   const [searchQuery, setSearchQuery] = useState('');
   const [isListening, setIsListening] = useState(false);
   const { itemCount } = useCart();
+  const { theme, setTheme } = useTheme();
   const { user } = useAuth();
   const { currentLocation, isServiceAvailable } = useLocation();
 
