@@ -39,7 +39,10 @@ export default function Header() {
   const { user } = useAuth();
   const { currentLocation, isServiceAvailable } = useLocation();
 
+  const router = useRouter();
+
   const startVoiceSearch = () => {
+    if (typeof window === 'undefined') return;
     if ('webkitSpeechRecognition' in window) {
       const recognition = new (window as any).webkitSpeechRecognition();
       recognition.continuous = false;
@@ -55,6 +58,12 @@ export default function Header() {
 
       recognition.start();
     }
+  };
+
+  const submitSearch = () => {
+    const q = (searchQuery || '').trim();
+    if (q.length === 0) return;
+    router.push(`/products?query=${encodeURIComponent(q)}`);
   };
 
   return (
