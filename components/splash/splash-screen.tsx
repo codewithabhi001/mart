@@ -1,79 +1,65 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { ShoppingCart, Sun, Moon } from 'lucide-react';
+import React from 'react';
+import { ShoppingCart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useTheme } from 'next-themes';
 
 export default function SplashScreen() {
-  const [isDark, setIsDark] = useState(false);
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-      setIsDark(true);
-      document.documentElement.classList.add('dark');
-    }
-  }, []);
-
-  const toggleTheme = () => {
-    setIsDark(!isDark);
-    if (!isDark) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
-  };
+  const { theme, setTheme } = useTheme();
+  const isDark = theme === 'dark';
 
   return (
     <div className={`min-h-screen flex items-center justify-center transition-colors duration-500 ${
       isDark ? 'bg-gray-900' : 'bg-gradient-to-br from-primary-green to-primary-orange'
     }`}>
-      <div className="text-center space-y-8">
+      <div className="text-center space-y-8 relative">
         {/* Theme Toggle */}
         <div className="absolute top-6 right-6">
           <Button
             variant="ghost"
             size="sm"
-            onClick={toggleTheme}
-            className={`${isDark ? 'text-white hover:bg-white/10' : 'text-white hover:bg-white/20'}`}
+            onClick={() => setTheme(isDark ? 'light' : 'dark')}
+            className="text-white"
           >
-            {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            {isDark ? 'Light' : 'Dark'}
           </Button>
         </div>
 
-        {/* Logo Animation */}
-        <div className="relative">
-          <div className={`w-24 h-24 mx-auto rounded-3xl flex items-center justify-center animate-pulse ${
-            isDark ? 'bg-white' : 'bg-white/20 backdrop-blur-sm'
-          }`}>
-            <ShoppingCart className={`w-12 h-12 ${isDark ? 'text-primary-green' : 'text-white'}`} />
+        {/* Animated Ring + Logo */}
+        <div className="relative flex items-center justify-center">
+          <div className="absolute -inset-8 flex items-center justify-center">
+            <svg className="w-56 h-56" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="g1" x1="0" x2="1">
+                  <stop offset="0%" stopColor="#47B05A" stopOpacity="1" />
+                  <stop offset="100%" stopColor="#9AE6B4" stopOpacity="0.2" />
+                </linearGradient>
+              </defs>
+              <circle cx="100" cy="100" r="70" stroke="url(#g1)" strokeWidth="6" strokeLinecap="round" className="animate-rotate-slow" />
+              <circle cx="100" cy="100" r="86" stroke="rgba(255,255,255,0.04)" strokeWidth="12" />
+            </svg>
           </div>
-          <div className="absolute inset-0 w-24 h-24 mx-auto rounded-3xl border-4 border-white/30 animate-ping" />
+
+          <div className={`w-36 h-36 rounded-full flex items-center justify-center shadow-lg backdrop-blur-sm ${isDark ? 'bg-white/8 border border-white/10' : 'bg-white/20'}`}>
+            <ShoppingCart className={`w-16 h-16 ${isDark ? 'text-primary-green' : 'text-white'}`} />
+          </div>
         </div>
 
         {/* Brand */}
         <div className="space-y-2">
-          <h1 className={`text-5xl font-bold ${isDark ? 'text-white' : 'text-white'}`}>
-            ILB Mart
+          <h1 className={`text-5xl font-extrabold tracking-tight ${isDark ? 'text-white' : 'text-white'}`}>
+            ILB MART
           </h1>
           <p className={`text-lg ${isDark ? 'text-gray-300' : 'text-white/90'}`}>
             Fresh groceries delivered in minutes
           </p>
         </div>
 
-        {/* Loading Animation */}
-        <div className="flex justify-center space-x-2">
-          {[0, 1, 2].map((i) => (
-            <div
-              key={i}
-              className={`w-3 h-3 rounded-full animate-bounce ${
-                isDark ? 'bg-white' : 'bg-white/80'
-              }`}
-              style={{ animationDelay: `${i * 0.2}s` }}
-            />
-          ))}
+        {/* CTA */}
+        <div className="flex justify-center space-x-4">
+          <Button className="bg-white text-green-600 px-6 py-3 rounded-full font-semibold shadow-md">Shop Now</Button>
+          <Button variant="outline" className="text-white border-white/30 px-6 py-3 rounded-full">Download App</Button>
         </div>
       </div>
     </div>
