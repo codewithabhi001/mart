@@ -255,9 +255,9 @@ export default function OrderTrackingPage({ orderId }: OrderTrackingPageProps) {
               </CardHeader>
               <CardContent>
                 <div className="p-4 bg-gray-50 rounded-xl">
-                  <p className="text-gray-700 font-medium">{typeof demoOrder.address === 'string' ? demoOrder.address : (
+                  <p className="text-gray-700 font-medium">{demoOrder ? (typeof demoOrder.address === 'string' ? demoOrder.address : (
                     demoOrder.address ? `${demoOrder.address.street || ''}${demoOrder.address.city ? ', ' + demoOrder.address.city : ''}${demoOrder.address.state ? ', ' + demoOrder.address.state : ''}${demoOrder.address.pincode ? ' - ' + demoOrder.address.pincode : ''}` : '—'
-                  )}</p>
+                  )) : '—'}</p>
                 </div>
               </CardContent>
             </Card>
