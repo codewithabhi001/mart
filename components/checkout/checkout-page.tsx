@@ -27,7 +27,7 @@ export default function CheckoutPage() {
       const defaultAddr = user.addresses?.find((a: any) => a.isDefault)?.id || user.addresses?.[0]?.id || '';
       if (defaultAddr) setSelectedAddress(defaultAddr);
     }
-  }, [user]);
+  }, [user, selectedAddress]);
   const [isPlacingOrder, setIsPlacingOrder] = useState(false);
   const [deliveryInstructions, setDeliveryInstructions] = useState('');
 

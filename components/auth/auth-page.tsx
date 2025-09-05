@@ -134,7 +134,7 @@ export default function AuthPage() {
                         className="text-center text-lg h-12"
                       />
                       <p className="text-xs text-gray-500 mt-2 text-center">
-                        We'll send you an OTP for verification
+                        We&apos;ll send you an OTP for verification
                       </p>
                     </div>
                   </TabsContent>
@@ -158,7 +158,7 @@ export default function AuthPage() {
                         />
                       )}
                       <p className="text-xs text-gray-500 mt-2 text-center">
-                        {isSignup ? 'Create your account' : 'We\'ll send you an OTP'}
+                        {isSignup ? 'Create your account' : 'We\'ll send you an OTP'.replace("\'", "&apos;")}
                       </p>
                     </div>
                   </TabsContent>

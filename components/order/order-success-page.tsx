@@ -55,7 +55,7 @@ export default function OrderSuccessPage() {
         <div className="space-y-4">
           <h1 className="text-4xl font-bold text-gray-800">Order Placed Successfully!</h1>
           <p className="text-xl text-gray-600">
-            Thank you for your order. We're preparing your items for delivery.
+            Thank you for your order. We&apos;re preparing your items for delivery.
           </p>
         </div>
 
@@ -84,7 +84,7 @@ export default function OrderSuccessPage() {
                   {order.items.map((it: any, idx: number) => (
                     <div key={idx} className="flex items-center justify-between">
                       <div className="flex items-center space-x-3">
-                        <img src={it.product.image} className="w-12 h-12 object-cover rounded" />
+                        <img src={it.product.image} alt={it.product.name} className="w-12 h-12 object-cover rounded" />
                         <div>
                           <div className="font-medium">{it.product.name}</div>
                           <div className="text-sm text-gray-500">Qty: {it.quantity}</div>
