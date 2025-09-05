@@ -24,17 +24,17 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <AuthProvider>
-          <LocationProvider>
-            <CartProvider>
-              <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-                <FetchGuard />
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+          <FetchGuard />
+          <AuthProvider>
+            <LocationProvider>
+              <CartProvider>
                 {children}
                 <Toaster />
-              </ThemeProvider>
-            </CartProvider>
-          </LocationProvider>
-        </AuthProvider>
+              </CartProvider>
+            </LocationProvider>
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
