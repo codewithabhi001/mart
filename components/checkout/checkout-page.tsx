@@ -57,11 +57,34 @@ export default function CheckoutPage() {
     }
 
     setIsPlacingOrder(true);
-    
+
     // Simulate order placement
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
+    await new Promise(resolve => setTimeout(resolve, 1200));
+
     const orderId = `ORD${Date.now()}`;
+
+    // Build order payload
+    const address = (user?.addresses || []).find((a: any) => a.id === selectedAddress) || null;
+    const order = {
+      id: orderId,
+      items: items.map(i => ({ product: i.product, quantity: i.quantity })),
+      total: finalTotal,
+      address,
+      deliveryInstructions,
+      paymentMethod: selectedPayment,
+      status: 'confirmed',
+      createdAt: new Date().toISOString(),
+      estimatedMinutes: 15,
+    };
+
+    try {
+      const existing = JSON.parse(localStorage.getItem('grocery-orders') || 'null') || [];
+      existing.unshift(order);
+      localStorage.setItem('grocery-orders', JSON.stringify(existing));
+    } catch (e) {
+      console.warn('Failed to save order to localStorage', e);
+    }
+
     clearCart();
     toast.success('Order placed successfully!');
     router.push(`/order-success?orderId=${orderId}`);
