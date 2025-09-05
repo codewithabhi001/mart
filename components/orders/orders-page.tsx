@@ -7,35 +7,18 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/lib/context/auth-context';
 
-const demoOrders = [
-  {
-    id: '1',
-    date: '2025-01-02',
-    status: 'delivered',
-    total: 450,
-    items: 5,
-    deliveryTime: '8 mins',
-  },
-  {
-    id: '2',
-    date: '2025-01-01',
-    status: 'on-the-way',
-    total: 320,
-    items: 3,
-    deliveryTime: '12 mins',
-  },
-  {
-    id: '3',
-    date: '2024-12-30',
-    status: 'delivered',
-    total: 180,
-    items: 2,
-    deliveryTime: '6 mins',
-  },
-];
-
 export default function OrdersPage() {
   const { user } = useAuth();
+  const [orders, setOrders] = React.useState<any[]>([]);
+
+  React.useEffect(() => {
+    try {
+      const stored = JSON.parse(localStorage.getItem('grocery-orders') || 'null') || [];
+      setOrders(stored);
+    } catch (e) {
+      setOrders([]);
+    }
+  }, []);
 
   if (!user) return null;
 
