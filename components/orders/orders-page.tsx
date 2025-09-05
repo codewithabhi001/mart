@@ -52,18 +52,16 @@ export default function OrdersPage() {
     <div className="container mx-auto px-4 py-8 max-w-4xl">
       <h1 className="text-3xl font-bold text-gray-800 mb-8">My Orders</h1>
 
-      {demoOrders.length === 0 ? (
+      {orders.length === 0 ? (
         <div className="text-center py-16">
           <Package className="w-24 h-24 mx-auto text-gray-300 mb-6" />
           <h2 className="text-2xl font-bold text-gray-800 mb-4">No Orders Yet</h2>
           <p className="text-gray-600 mb-6">Start shopping and your orders will appear here</p>
-          <Button className="bg-primary hover:bg-primary/90">
-            Start Shopping
-          </Button>
+          <a href="/products"><Button className="bg-primary-green text-white">Start Shopping</Button></a>
         </div>
       ) : (
         <div className="space-y-4">
-          {demoOrders.map((order) => (
+          {orders.map((order) => (
             <Card key={order.id} className="card-hover">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between mb-4">
@@ -71,7 +69,7 @@ export default function OrdersPage() {
                     {getStatusIcon(order.status)}
                     <div>
                       <h3 className="font-semibold">Order #{order.id}</h3>
-                      <p className="text-sm text-gray-600">{order.date}</p>
+                      <p className="text-sm text-gray-600">{order.createdAt ? new Date(order.createdAt).toLocaleString() : ''}</p>
                     </div>
                   </div>
                   {getStatusBadge(order.status)}
@@ -80,7 +78,7 @@ export default function OrdersPage() {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                   <div>
                     <span className="text-gray-600">Items:</span>
-                    <p className="font-medium">{order.items} items</p>
+                    <p className="font-medium">{order.items.reduce((s: number, it: any) => s + it.quantity, 0)} items</p>
                   </div>
                   <div>
                     <span className="text-gray-600">Total:</span>
@@ -88,7 +86,7 @@ export default function OrdersPage() {
                   </div>
                   <div>
                     <span className="text-gray-600">Delivery:</span>
-                    <p className="font-medium">{order.deliveryTime}</p>
+                    <p className="font-medium">{order.estimatedMinutes ? `${order.estimatedMinutes} mins` : '—'}</p>
                   </div>
                   <div className="flex space-x-2">
                     <a href={`/orders/${order.id}`}>
