@@ -1,5 +1,7 @@
 'use client';
 
+"use client";
+
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, MapPin, Phone, Package, Clock, CheckCircle, Truck, User, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -25,18 +27,59 @@ export default function OrderTrackingPage({ orderId }: OrderTrackingPageProps) {
   const [estimatedTime, setEstimatedTime] = useState(8);
   const [progress, setProgress] = useState(75);
 
+  const [mounted, setMounted] = useState(false);
+  const [demoOrder, setDemoOrder] = useState<any | null>(null);
+
+  // Load order from localStorage on client only
   useEffect(() => {
-    // load status from stored order if available
+    setMounted(true);
     try {
       const orders = JSON.parse(localStorage.getItem('grocery-orders') || 'null') || [];
-      const o = orders.find((x: any) => x.id === orderId);
-      if (o && o.status) {
-        const idx = ['confirmed','preparing','on-the-way','delivered'].indexOf(o.status);
+      const found = orders.find((o: any) => o.id === orderId) || null;
+      if (found) {
+        setDemoOrder(found);
+        const idx = ['confirmed','preparing','on-the-way','delivered'].indexOf(found.status);
         if (idx >= 0) setCurrentStatus(idx);
+        if (typeof found.estimatedMinutes === 'number') setEstimatedTime(found.estimatedMinutes);
+      } else {
+        setDemoOrder({
+          id: orderId,
+          items: [
+            { name: 'Fresh Bananas', quantity: 2, price: 40, image: 'https://images.pexels.com/photos/2872755/pexels-photo-2872755.jpeg?auto=compress&cs=tinysrgb&w=400' },
+            { name: 'Whole Milk', quantity: 1, price: 60, image: 'https://images.pexels.com/photos/248412/pexels-photo-248412.jpeg?auto=compress&cs=tinysrgb&w=400' },
+            { name: 'Brown Bread', quantity: 1, price: 45, image: 'https://images.pexels.com/photos/209206/pexels-photo-209206.jpeg?auto=compress&cs=tinysrgb&w=400' },
+          ],
+          total: 145,
+          address: '123 Main Street, Mumbai, Maharashtra 400001',
+          deliveryPartner: 'Raj Kumar',
+          phone: '+91 98765 43210',
+          rating: 4.8,
+          status: 'on-the-way',
+          estimatedMinutes: 8,
+        });
       }
-    } catch(e) {}
+    } catch (e) {
+      setDemoOrder({
+        id: orderId,
+        items: [
+          { name: 'Fresh Bananas', quantity: 2, price: 40, image: 'https://images.pexels.com/photos/2872755/pexels-photo-2872755.jpeg?auto=compress&cs=tinysrgb&w=400' },
+          { name: 'Whole Milk', quantity: 1, price: 60, image: 'https://images.pexels.com/photos/248412/pexels-photo-248412.jpeg?auto=compress&cs=tinysrgb&w=400' },
+          { name: 'Brown Bread', quantity: 1, price: 45, image: 'https://images.pexels.com/photos/209206/pexels-photo-209206.jpeg?auto=compress&cs=tinysrgb&w=400' },
+        ],
+        total: 145,
+        address: '123 Main Street, Mumbai, Maharashtra 400001',
+        deliveryPartner: 'Raj Kumar',
+        phone: '+91 98765 43210',
+        rating: 4.8,
+        status: 'on-the-way',
+        estimatedMinutes: 8,
+      });
+    }
+  }, [orderId]);
 
-    // Simulate progression every 10s for demo
+  // Simulate progression every 10s for demo (only when mounted)
+  useEffect(() => {
+    if (!mounted) return;
     const timer = setInterval(() => {
       setEstimatedTime(prev => Math.max(0, prev - 1));
       setProgress(prev => Math.min(100, prev + 5));
@@ -57,32 +100,7 @@ export default function OrderTrackingPage({ orderId }: OrderTrackingPageProps) {
     }, 10000);
 
     return () => clearInterval(timer);
-  }, [orderId]);
-
-  // Try to load real order from localStorage
-  let demoOrder = null as any;
-  try {
-    const orders = JSON.parse(localStorage.getItem('grocery-orders') || 'null') || [];
-    demoOrder = orders.find((o: any) => o.id === orderId) || null;
-  } catch (e) {
-    demoOrder = null;
-  }
-
-  if (!demoOrder) {
-    demoOrder = {
-      id: orderId,
-      items: [
-        { name: 'Fresh Bananas', quantity: 2, price: 40, image: 'https://images.pexels.com/photos/2872755/pexels-photo-2872755.jpeg?auto=compress&cs=tinysrgb&w=400' },
-        { name: 'Whole Milk', quantity: 1, price: 60, image: 'https://images.pexels.com/photos/248412/pexels-photo-248412.jpeg?auto=compress&cs=tinysrgb&w=400' },
-        { name: 'Brown Bread', quantity: 1, price: 45, image: 'https://images.pexels.com/photos/209206/pexels-photo-209206.jpeg?auto=compress&cs=tinysrgb&w=400' },
-      ],
-      total: 145,
-      address: '123 Main Street, Mumbai, Maharashtra 400001',
-      deliveryPartner: 'Raj Kumar',
-      phone: '+91 98765 43210',
-      rating: 4.8,
-    };
-  }
+  }, [mounted, orderId]);
 
   return (
     <div className="min-h-screen bg-gray-50">
