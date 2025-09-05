@@ -24,15 +24,19 @@ export default function CheckoutPage() {
   const [isPlacingOrder, setIsPlacingOrder] = useState(false);
   const [deliveryInstructions, setDeliveryInstructions] = useState('');
 
-  if (!user) {
-    router.push('/login');
-    return null;
-  }
+  useEffect(() => {
+    // Redirect to login if not authenticated
+    if (!user) {
+      router.push('/login');
+      return;
+    }
 
-  if (items.length === 0) {
-    router.push('/cart');
-    return null;
-  }
+    // Redirect to cart if no items
+    if (items.length === 0) {
+      router.push('/cart');
+      return;
+    }
+  }, [user, items.length, router]);
 
   const deliveryFee = 0; // Free delivery
   const taxes = Math.round(total * 0.05); // 5% tax
