@@ -1,4 +1,5 @@
 import Header from '@/components/header/header';
+import Header from '@/components/header/header';
 import OrderTrackingPage from '@/components/order/order-tracking-page';
 import Footer from '@/components/footer/footer';
 
