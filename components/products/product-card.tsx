@@ -87,7 +87,7 @@ export default function ProductCard({ product, showDiscount }: ProductCardProps)
           <p className="text-xs text-gray-500 font-medium">{product.unit}</p>
 
           {/* Price Section */}
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between mb-3">
             <div className="flex items-center space-x-2">
               <span className="font-bold text-lg text-gray-900">₹{product.price}</span>
               {product.originalPrice && (
@@ -97,14 +97,16 @@ export default function ProductCard({ product, showDiscount }: ProductCardProps)
           </div>
 
           {/* Add to Cart Button */}
-          <Button
-            className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold rounded-xl py-2 transition-all duration-300 shadow-md hover:shadow-lg"
-            size="sm"
-            onClick={handleAddToCart}
-          >
-            <Plus className="w-4 h-4 mr-1" />
-            Add
-          </Button>
+          <div>
+            <Button
+              className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold rounded-xl py-2 transition-all duration-300 shadow-md hover:shadow-lg"
+              size="sm"
+              onClick={handleAddToCart}
+            >
+              <Plus className="w-4 h-4 mr-1" />
+              Add
+            </Button>
+          </div>
         </div>
       </div>
     </Link>
