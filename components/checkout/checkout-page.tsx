@@ -87,7 +87,8 @@ export default function CheckoutPage() {
 
     clearCart();
     toast.success('Order placed successfully!');
-    router.push(`/order-success?orderId=${orderId}`);
+    // Redirect straight to order tracking
+    router.push(`/orders/${orderId}`);
   };
 
   return (
