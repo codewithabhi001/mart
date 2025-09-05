@@ -6,6 +6,7 @@ import { CartProvider } from '@/lib/context/cart-context';
 import { AuthProvider } from '@/lib/context/auth-context';
 import { LocationProvider } from '@/lib/context/location-context';
 import { ThemeProvider } from '@/components/theme-provider';
+import FetchGuard from '@/components/client/fetch-guard';
 
 const inter = Inter({ subsets: ['latin'] });
 
