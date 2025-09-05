@@ -12,8 +12,8 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <BannerCarousel />
       <CategorySection />
+      <BannerCarousel />
       <TrendingProducts />
       <RecommendedProducts />
       <DealsSection />
