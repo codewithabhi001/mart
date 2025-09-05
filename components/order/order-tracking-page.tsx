@@ -162,7 +162,7 @@ export default function OrderTrackingPage({ orderId }: OrderTrackingPageProps) {
                 <div className="flex items-center justify-between p-4 bg-gray-50 rounded-2xl">
                   <div className="flex items-center space-x-4">
                     <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center text-white font-bold text-xl">
-                      {demoOrder.deliveryPartner.charAt(0)}
+                      {demoOrder?.deliveryPartner?.charAt(0) ?? '?'}
                     </div>
                     <div>
                       <h4 className="font-semibold text-lg">{demoOrder.deliveryPartner}</h4>
@@ -206,7 +206,7 @@ export default function OrderTrackingPage({ orderId }: OrderTrackingPageProps) {
                 <CardTitle>Order Items</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                {demoOrder.items.map((item, index) => (
+                {(demoOrder.items || []).map((item, index) => (
                   <div key={index} className="flex items-center space-x-3 p-3 bg-gray-50 rounded-xl">
                     <img
                       src={item.image}
