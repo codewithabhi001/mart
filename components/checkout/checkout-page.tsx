@@ -90,7 +90,7 @@ export default function CheckoutPage() {
             <Card className="shadow-sm">
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
-                  <MapPin className="w-5 h-5 text-purple-600" />
+                  <MapPin className="w-5 h-5 text-green-600" />
                   <span>Delivery Address</span>
                 </CardTitle>
               </CardHeader>
@@ -107,7 +107,7 @@ export default function CheckoutPage() {
             <Card className="shadow-sm">
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
-                  <Truck className="w-5 h-5 text-purple-600" />
+                  <Truck className="w-5 h-5 text-green-600" />
                   <span>Delivery Instructions</span>
                 </CardTitle>
               </CardHeader>
@@ -117,12 +117,12 @@ export default function CheckoutPage() {
                     placeholder="Add delivery instructions (optional)"
                     value={deliveryInstructions}
                     onChange={(e) => setDeliveryInstructions(e.target.value)}
-                    className="w-full p-3 border border-gray-200 rounded-xl resize-none h-20 focus:border-purple-500 focus:ring-purple-500"
+                    className="w-full p-3 border border-gray-200 rounded-xl resize-none h-20 focus:border-green-600 focus:ring-green-600"
                   />
                   <div className="grid grid-cols-2 gap-3">
-                    <div className="flex items-center space-x-2 p-3 bg-blue-50 rounded-xl">
-                      <CheckCircle className="w-4 h-4 text-blue-600" />
-                      <span className="text-sm text-blue-800">Contact-free delivery</span>
+                    <div className="flex items-center space-x-2 p-3 bg-green-50 rounded-xl">
+                      <CheckCircle className="w-4 h-4 text-green-600" />
+                      <span className="text-sm text-green-800">Contact-free delivery</span>
                     </div>
                     <div className="flex items-center space-x-2 p-3 bg-green-50 rounded-xl">
                       <Shield className="w-4 h-4 text-green-600" />
@@ -137,7 +137,7 @@ export default function CheckoutPage() {
             <Card className="shadow-sm">
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
-                  <CreditCard className="w-5 h-5 text-purple-600" />
+                  <CreditCard className="w-5 h-5 text-green-600" />
                   <span>Payment Method</span>
                 </CardTitle>
               </CardHeader>
@@ -215,7 +215,7 @@ export default function CheckoutPage() {
                 {/* Place Order Button */}
                 <Button
                   size="lg"
-                  className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold rounded-xl py-4 shadow-lg hover:shadow-xl transition-all"
+                  className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold rounded-xl py-4 shadow-lg hover:shadow-xl transition-all"
                   onClick={placeOrder}
                   disabled={isPlacingOrder || !selectedAddress}
                 >
