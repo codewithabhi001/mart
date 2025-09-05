@@ -108,13 +108,11 @@ export default function OrdersPage() {
                     <p className="font-medium">{order.deliveryTime}</p>
                   </div>
                   <div className="flex space-x-2">
-                    <Button variant="outline" size="sm">
-                      View Details
-                    </Button>
+                    <a href={`/orders/${order.id}`}>
+                      <Button variant="outline" size="sm">View Details</Button>
+                    </a>
                     {order.status === 'delivered' && (
-                      <Button variant="outline" size="sm">
-                        Reorder
-                      </Button>
+                      <Button variant="outline" size="sm">Reorder</Button>
                     )}
                   </div>
                 </div>
