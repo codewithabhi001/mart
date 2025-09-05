@@ -11,6 +11,19 @@ export default function OrderSuccessPage() {
   const searchParams = useSearchParams();
   const orderId = searchParams.get('orderId') || 'ORD123456';
 
+  // try to load order from localStorage
+  const [order, setOrder] = React.useState<any>(null);
+
+  useEffect(() => {
+    try {
+      const orders = JSON.parse(localStorage.getItem('grocery-orders') || 'null') || [];
+      const found = orders.find((o: any) => o.id === orderId) || null;
+      setOrder(found);
+    } catch (e) {
+      setOrder(null);
+    }
+  }, [orderId]);
+
   useEffect(() => {
     // Confetti animation could be added here
   }, []);
@@ -22,6 +35,10 @@ export default function OrderSuccessPage() {
     link.download = `invoice-${orderId}.txt`;
     link.click();
   };
+
+  const displayOrderId = order?.id || orderId;
+  const displayTotal = order?.total || '—';
+  const displayETA = order?.estimatedMinutes ? `${order.estimatedMinutes} mins` : '10-15 minutes';
 
   return (
     <div className="container mx-auto px-4 py-16">
