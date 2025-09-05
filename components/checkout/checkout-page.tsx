@@ -38,12 +38,12 @@ export default function CheckoutPage() {
       return;
     }
 
-    // Redirect to cart if no items
-    if (items.length === 0) {
+    // Redirect to cart if no items (do not redirect while placing an order)
+    if (items.length === 0 && !isPlacingOrder) {
       router.push('/cart');
       return;
     }
-  }, [user, items.length, router]);
+  }, [user, items.length, router, isPlacingOrder]);
 
   const deliveryFee = 0; // Free delivery
   const taxes = Math.round(total * 0.05); // 5% tax
