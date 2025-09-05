@@ -118,18 +118,22 @@ export default function Header() {
                   placeholder="Search for products..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={(e) => { if (e.key === 'Enter') submitSearch(); }}
                   className="pl-12 pr-12 h-12 bg-gray-50 border-gray-200 focus:border-green-600 focus:ring-green-600 rounded-xl"
                 />
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className={`absolute right-2 top-1/2 transform -translate-y-1/2 h-8 w-8 p-0 rounded-lg ${
-                    isListening ? 'text-red-500 animate-pulse bg-red-50' : 'text-gray-400 hover:text-green-600 hover:bg-green-50'
-                  }`}
-                  onClick={startVoiceSearch}
-                >
-                  <Mic className="w-4 h-4" />
-                </Button>
+                <div className="absolute right-2 top-1/2 transform -translate-y-1/2 flex items-center space-x-2">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className={`h-8 w-8 p-0 rounded-lg ${isListening ? 'text-red-500 animate-pulse bg-red-50' : 'text-gray-400 hover:text-green-600 hover:bg-green-50'}`}
+                    onClick={startVoiceSearch}
+                  >
+                    <Mic className="w-4 h-4" />
+                  </Button>
+                  <Button variant="ghost" size="sm" className="h-8 w-8 p-0 rounded-lg text-gray-400 hover:text-green-600 hover:bg-green-50" onClick={submitSearch} aria-label="Search">
+                    <Search className="w-4 h-4" />
+                  </Button>
+                </div>
               </div>
             </div>
 
