@@ -5,6 +5,7 @@ import { Toaster } from '@/components/ui/sonner';
 import { CartProvider } from '@/lib/context/cart-context';
 import { AuthProvider } from '@/lib/context/auth-context';
 import { LocationProvider } from '@/lib/context/location-context';
+import { ThemeProvider } from '@/components/theme-provider';
 
 const inter = Inter({ subsets: ['latin'] });
 
