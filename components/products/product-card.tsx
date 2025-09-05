@@ -79,7 +79,7 @@ export default function ProductCard({ product, showDiscount }: ProductCardProps)
           </div>
 
           {/* Product Name */}
-          <h3 className="font-semibold text-gray-800 line-clamp-2 text-sm leading-tight group-hover:text-purple-600 transition-colors">
+          <h3 className="font-semibold text-gray-800 line-clamp-2 text-sm leading-tight group-hover:text-green-600 transition-colors">
             {product.name}
           </h3>
           
@@ -98,7 +98,7 @@ export default function ProductCard({ product, showDiscount }: ProductCardProps)
 
           {/* Add to Cart Button */}
           <Button
-            className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold rounded-xl py-2 transition-all duration-300 shadow-md hover:shadow-lg"
+            className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold rounded-xl py-2 transition-all duration-300 shadow-md hover:shadow-lg"
             size="sm"
             onClick={handleAddToCart}
           >
