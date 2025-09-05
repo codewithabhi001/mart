@@ -1,9 +1,9 @@
 import Header from '@/components/header/header';
 export const dynamic = 'force-dynamic';
 
+import Header from '@/components/header/header';
 import ProductDetails from '@/components/products/product-details';
 import Footer from '@/components/footer/footer';
-import { products } from '@/lib/data/products';
 
 interface ProductPageProps {
   params: {
@@ -19,8 +19,4 @@ export default function ProductPage({ params }: ProductPageProps) {
       <Footer />
     </main>
   );
-}
-
-export function generateStaticParams() {
-  return products.map((p) => ({ id: p.id }));
 }
