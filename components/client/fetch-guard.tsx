@@ -24,16 +24,28 @@ export default function FetchGuard() {
         const blocked = ['fullstory.com', 'edge.fullstory.com', 'static.fullstory.com'];
         if (url && blocked.some((b) => url.includes(b))) {
           // return a minimal successful empty Response
-          return new Response(null, { status: 204, statusText: 'No Content (blocked)' });
+          return Promise.resolve(new Response(null, { status: 204, statusText: 'No Content (blocked)' }));
         }
 
-        return await origFetch(...args);
+        if (typeof origFetch !== 'function') {
+          // fallback: if original fetch not available, return an empty successful response to avoid throwing
+          return Promise.resolve(new Response(null, { status: 204, statusText: 'No Content (no-orig)' }));
+        }
+
+        try {
+          return await origFetch(...args);
+        } catch (innerErr) {
+          // network or CORS error from third-party; don't rethrow, return an empty response
+          // eslint-disable-next-line no-console
+          console.warn('[fetch-guard] fetch failed for', url, innerErr);
+          return Promise.resolve(new Response(null, { status: 520, statusText: 'Fetch Failed (guarded)' }));
+        }
       } catch (err) {
         // Suppress noisy fetch errors from 3rd-party scripts
         // eslint-disable-next-line no-console
         console.warn('[fetch-guard] suppressed fetch error', err);
         try {
-          return new Response(null, { status: 520, statusText: 'Fetch Failed (guarded)' });
+          return Promise.resolve(new Response(null, { status: 520, statusText: 'Fetch Failed (guarded)' }));
         } catch (e) {
           return Promise.reject(err);
         }
