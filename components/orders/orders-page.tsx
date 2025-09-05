@@ -7,35 +7,18 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/lib/context/auth-context';
 
-const demoOrders = [
-  {
-    id: '1',
-    date: '2025-01-02',
-    status: 'delivered',
-    total: 450,
-    items: 5,
-    deliveryTime: '8 mins',
-  },
-  {
-    id: '2',
-    date: '2025-01-01',
-    status: 'on-the-way',
-    total: 320,
-    items: 3,
-    deliveryTime: '12 mins',
-  },
-  {
-    id: '3',
-    date: '2024-12-30',
-    status: 'delivered',
-    total: 180,
-    items: 2,
-    deliveryTime: '6 mins',
-  },
-];
-
 export default function OrdersPage() {
   const { user } = useAuth();
+  const [orders, setOrders] = React.useState<any[]>([]);
+
+  React.useEffect(() => {
+    try {
+      const stored = JSON.parse(localStorage.getItem('grocery-orders') || 'null') || [];
+      setOrders(stored);
+    } catch (e) {
+      setOrders([]);
+    }
+  }, []);
 
   if (!user) return null;
 
@@ -44,7 +27,7 @@ export default function OrdersPage() {
       case 'delivered':
         return <CheckCircle className="w-5 h-5 text-green-500" />;
       case 'on-the-way':
-        return <Truck className="w-5 h-5 text-blue-500" />;
+        return <Truck className="w-5 h-5 text-green-500" />;
       case 'preparing':
         return <Clock className="w-5 h-5 text-orange-500" />;
       default:
@@ -57,9 +40,9 @@ export default function OrdersPage() {
       case 'delivered':
         return <Badge className="bg-green-500">Delivered</Badge>;
       case 'on-the-way':
-        return <Badge className="bg-blue-500">On the Way</Badge>;
+        return <Badge className="bg-green-500">On the Way</Badge>;
       case 'preparing':
-        return <Badge className="bg-orange-500">Preparing</Badge>;
+        return <Badge className="bg-amber-500">Preparing</Badge>;
       default:
         return <Badge variant="secondary">Pending</Badge>;
     }
@@ -69,18 +52,16 @@ export default function OrdersPage() {
     <div className="container mx-auto px-4 py-8 max-w-4xl">
       <h1 className="text-3xl font-bold text-gray-800 mb-8">My Orders</h1>
 
-      {demoOrders.length === 0 ? (
+      {orders.length === 0 ? (
         <div className="text-center py-16">
           <Package className="w-24 h-24 mx-auto text-gray-300 mb-6" />
           <h2 className="text-2xl font-bold text-gray-800 mb-4">No Orders Yet</h2>
           <p className="text-gray-600 mb-6">Start shopping and your orders will appear here</p>
-          <Button className="bg-primary hover:bg-primary/90">
-            Start Shopping
-          </Button>
+          <a href="/products"><Button className="bg-primary-green text-white">Start Shopping</Button></a>
         </div>
       ) : (
         <div className="space-y-4">
-          {demoOrders.map((order) => (
+          {orders.map((order) => (
             <Card key={order.id} className="card-hover">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between mb-4">
@@ -88,7 +69,7 @@ export default function OrdersPage() {
                     {getStatusIcon(order.status)}
                     <div>
                       <h3 className="font-semibold">Order #{order.id}</h3>
-                      <p className="text-sm text-gray-600">{order.date}</p>
+                      <p className="text-sm text-gray-600">{order.createdAt ? new Date(order.createdAt).toLocaleString() : ''}</p>
                     </div>
                   </div>
                   {getStatusBadge(order.status)}
@@ -97,7 +78,7 @@ export default function OrdersPage() {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                   <div>
                     <span className="text-gray-600">Items:</span>
-                    <p className="font-medium">{order.items} items</p>
+                    <p className="font-medium">{order.items.reduce((s: number, it: any) => s + it.quantity, 0)} items</p>
                   </div>
                   <div>
                     <span className="text-gray-600">Total:</span>
@@ -105,16 +86,14 @@ export default function OrdersPage() {
                   </div>
                   <div>
                     <span className="text-gray-600">Delivery:</span>
-                    <p className="font-medium">{order.deliveryTime}</p>
+                    <p className="font-medium">{order.estimatedMinutes ? `${order.estimatedMinutes} mins` : '—'}</p>
                   </div>
                   <div className="flex space-x-2">
-                    <Button variant="outline" size="sm">
-                      View Details
-                    </Button>
+                    <a href={`/orders/${order.id}`}>
+                      <Button variant="outline" size="sm">View Details</Button>
+                    </a>
                     {order.status === 'delivered' && (
-                      <Button variant="outline" size="sm">
-                        Reorder
-                      </Button>
+                      <Button variant="outline" size="sm">Reorder</Button>
                     )}
                   </div>
                 </div>

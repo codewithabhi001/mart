@@ -10,7 +10,7 @@ export default function HeroSection() {
   const { currentLocation } = useLocation();
 
   return (
-    <section className="min-h-screen bg-gradient-to-br from-purple-600 via-blue-600 to-teal-500 text-white relative overflow-hidden">
+    <section className="min-h-screen bg-gradient-to-br from-green-600 via-emerald-600 to-lime-500 text-white relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-20 left-20 w-72 h-72 bg-white rounded-full blur-3xl"></div>
@@ -44,11 +44,11 @@ export default function HeroSection() {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link href="/products">
-                <Button size="lg" className="bg-white text-purple-600 hover:bg-gray-100 text-lg px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all">
+                <Button size="lg" className="bg-white text-green-600 hover:bg-white/90 text-lg px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all">
                   Order Now
                 </Button>
               </Link>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 text-lg px-8 py-4 rounded-full font-semibold">
+              <Button size="lg" className="bg-white text-green-600 hover:bg-white/90 text-lg px-8 py-4 rounded-full font-semibold">
                 Download App
               </Button>
             </div>

@@ -13,7 +13,7 @@ const banners = [
     description: 'Farm fresh produce delivered instantly',
     image: 'https://images.pexels.com/photos/1300972/pexels-photo-1300972.jpeg?auto=compress&cs=tinysrgb&w=800',
     cta: 'Shop Now',
-    bgGradient: 'from-green-400 to-emerald-600',
+    bgGradient: 'from-green-500 to-emerald-600',
     link: '/products?category=Fruits%20%26%20Vegetables',
   },
   {
@@ -23,7 +23,7 @@ const banners = [
     description: 'Fresh milk, bread, and bakery items',
     image: 'https://images.pexels.com/photos/824635/pexels-photo-824635.jpeg?auto=compress&cs=tinysrgb&w=800',
     cta: 'Explore',
-    bgGradient: 'from-blue-400 to-cyan-600',
+    bgGradient: 'from-green-400 to-lime-600',
     link: '/products?category=Dairy%20%26%20Bakery',
   },
   {
@@ -33,7 +33,7 @@ const banners = [
     description: 'Premium skincare and haircare products',
     image: 'https://images.pexels.com/photos/4465124/pexels-photo-4465124.jpeg?auto=compress&cs=tinysrgb&w=800',
     cta: 'Shop Beauty',
-    bgGradient: 'from-purple-400 to-pink-600',
+    bgGradient: 'from-emerald-500 to-teal-600',
     link: '/products?category=Personal%20Care',
   },
   {
@@ -43,7 +43,7 @@ const banners = [
     description: 'Your favorite snacks and drinks',
     image: 'https://images.pexels.com/photos/4959827/pexels-photo-4959827.jpeg?auto=compress&cs=tinysrgb&w=800',
     cta: 'Order Now',
-    bgGradient: 'from-orange-400 to-red-600',
+    bgGradient: 'from-green-600 to-emerald-700',
     link: '/products?category=Snacks%20%26%20Packaged%20Foods',
   },
 ];

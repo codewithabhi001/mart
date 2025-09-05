@@ -109,3 +109,14 @@
     transform: translateY(0);
   }
 }
+
+/* Splash animations */
+@keyframes rotateSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-rotate-slow {
+  animation: rotateSlow 6s linear infinite;
+  transform-origin: center;
+}

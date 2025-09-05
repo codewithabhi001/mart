@@ -1,19 +1,11 @@
-import Header from '@/components/header/header';
-import OrderTrackingPage from '@/components/order/order-tracking-page';
-import Footer from '@/components/footer/footer';
+"use client";
 
-interface OrderTrackingProps {
-  params: {
-    id: string;
-  };
-}
+import React from 'react';
+import dynamic from 'next/dynamic';
 
-export default function OrderTracking({ params }: OrderTrackingProps) {
-  return (
-    <main className="min-h-screen bg-cream-light">
-      <Header />
-      <OrderTrackingPage orderId={params.id} />
-      <Footer />
-    </main>
-  );
+// Render the client wrapper dynamically (client component)
+const OrderTrackingClient = dynamic(() => import('@/components/order/order-tracking-client'), { ssr: false });
+
+export default function OrderTrackingPageWrapper() {
+  return <OrderTrackingClient />;
 }

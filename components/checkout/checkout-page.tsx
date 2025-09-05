@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MapPin, CreditCard, Truck, Shield, ArrowLeft, Clock, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -19,20 +19,31 @@ export default function CheckoutPage() {
   const { items, total, clearCart } = useCart();
   const { user } = useAuth();
   const router = useRouter();
-  const [selectedAddress, setSelectedAddress] = useState(user?.addresses.find(a => a.isDefault)?.id || '');
+  const [selectedAddress, setSelectedAddress] = useState(user?.addresses?.find((a: any) => a.isDefault)?.id || '');
   const [selectedPayment, setSelectedPayment] = useState('cod');
+
+  useEffect(() => {
+    if (user && (!selectedAddress || selectedAddress === '')) {
+      const defaultAddr = user.addresses?.find((a: any) => a.isDefault)?.id || user.addresses?.[0]?.id || '';
+      if (defaultAddr) setSelectedAddress(defaultAddr);
+    }
+  }, [user, selectedAddress]);
   const [isPlacingOrder, setIsPlacingOrder] = useState(false);
   const [deliveryInstructions, setDeliveryInstructions] = useState('');
 
-  if (!user) {
-    router.push('/login');
-    return null;
-  }
+  useEffect(() => {
+    // Redirect to login if not authenticated
+    if (!user) {
+      router.push('/login');
+      return;
+    }
 
-  if (items.length === 0) {
-    router.push('/cart');
-    return null;
-  }
+    // Redirect to cart if no items (do not redirect while placing an order)
+    if (items.length === 0 && !isPlacingOrder) {
+      router.push('/cart');
+      return;
+    }
+  }, [user, items.length, router, isPlacingOrder]);
 
   const deliveryFee = 0; // Free delivery
   const taxes = Math.round(total * 0.05); // 5% tax
@@ -46,13 +57,37 @@ export default function CheckoutPage() {
     }
 
     setIsPlacingOrder(true);
-    
+
     // Simulate order placement
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
+    await new Promise(resolve => setTimeout(resolve, 1200));
+
     const orderId = `ORD${Date.now()}`;
+
+    // Build order payload
+    const address = (user?.addresses || []).find((a: any) => a.id === selectedAddress) || null;
+    const order = {
+      id: orderId,
+      items: items.map(i => ({ product: i.product, quantity: i.quantity })),
+      total: finalTotal,
+      address,
+      deliveryInstructions,
+      paymentMethod: selectedPayment,
+      status: 'confirmed',
+      createdAt: new Date().toISOString(),
+      estimatedMinutes: 15,
+    };
+
+    try {
+      const existing = JSON.parse(localStorage.getItem('grocery-orders') || 'null') || [];
+      existing.unshift(order);
+      localStorage.setItem('grocery-orders', JSON.stringify(existing));
+    } catch (e) {
+      console.warn('Failed to save order to localStorage', e);
+    }
+
     clearCart();
     toast.success('Order placed successfully!');
+    // Redirect to order success page first, user can tap Track Order to go to tracking
     router.push(`/order-success?orderId=${orderId}`);
   };
 
@@ -90,13 +125,13 @@ export default function CheckoutPage() {
             <Card className="shadow-sm">
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
-                  <MapPin className="w-5 h-5 text-purple-600" />
+                  <MapPin className="w-5 h-5 text-green-600" />
                   <span>Delivery Address</span>
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <AddressSelector
-                  addresses={user.addresses}
+                  addresses={user?.addresses || []}
                   selectedId={selectedAddress}
                   onSelect={setSelectedAddress}
                 />
@@ -107,7 +142,7 @@ export default function CheckoutPage() {
             <Card className="shadow-sm">
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
-                  <Truck className="w-5 h-5 text-purple-600" />
+                  <Truck className="w-5 h-5 text-green-600" />
                   <span>Delivery Instructions</span>
                 </CardTitle>
               </CardHeader>
@@ -117,12 +152,12 @@ export default function CheckoutPage() {
                     placeholder="Add delivery instructions (optional)"
                     value={deliveryInstructions}
                     onChange={(e) => setDeliveryInstructions(e.target.value)}
-                    className="w-full p-3 border border-gray-200 rounded-xl resize-none h-20 focus:border-purple-500 focus:ring-purple-500"
+                    className="w-full p-3 border border-gray-200 rounded-xl resize-none h-20 focus:border-green-600 focus:ring-green-600"
                   />
                   <div className="grid grid-cols-2 gap-3">
-                    <div className="flex items-center space-x-2 p-3 bg-blue-50 rounded-xl">
-                      <CheckCircle className="w-4 h-4 text-blue-600" />
-                      <span className="text-sm text-blue-800">Contact-free delivery</span>
+                    <div className="flex items-center space-x-2 p-3 bg-green-50 rounded-xl">
+                      <CheckCircle className="w-4 h-4 text-green-600" />
+                      <span className="text-sm text-green-800">Contact-free delivery</span>
                     </div>
                     <div className="flex items-center space-x-2 p-3 bg-green-50 rounded-xl">
                       <Shield className="w-4 h-4 text-green-600" />
@@ -137,7 +172,7 @@ export default function CheckoutPage() {
             <Card className="shadow-sm">
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
-                  <CreditCard className="w-5 h-5 text-purple-600" />
+                  <CreditCard className="w-5 h-5 text-green-600" />
                   <span>Payment Method</span>
                 </CardTitle>
               </CardHeader>
@@ -207,7 +242,7 @@ export default function CheckoutPage() {
                   <div className="flex items-center space-x-2">
                     <CheckCircle className="w-4 h-4 text-green-600" />
                     <span className="text-sm text-green-800 font-medium">
-                      You're saving ₹40 on delivery!
+                      You&apos;re saving ₹40 on delivery!
                     </span>
                   </div>
                 </div>
@@ -215,7 +250,7 @@ export default function CheckoutPage() {
                 {/* Place Order Button */}
                 <Button
                   size="lg"
-                  className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold rounded-xl py-4 shadow-lg hover:shadow-xl transition-all"
+                  className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold rounded-xl py-4 shadow-lg hover:shadow-xl transition-all"
                   onClick={placeOrder}
                   disabled={isPlacingOrder || !selectedAddress}
                 >

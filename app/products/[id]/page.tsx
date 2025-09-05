@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import Header from '@/components/header/header';
 import ProductDetails from '@/components/products/product-details';
 import Footer from '@/components/footer/footer';
@@ -16,13 +18,4 @@ export default function ProductPage({ params }: ProductPageProps) {
       <Footer />
     </main>
   );
-}
-
-export function generateStaticParams() {
-  // Replace with your actual product IDs
-  return [
-    { id: '1' },
-    { id: '2' },
-    { id: '3' },
-  ];
 }

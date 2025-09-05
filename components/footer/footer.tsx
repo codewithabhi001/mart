@@ -13,10 +13,10 @@ export default function Footer() {
               <div className="w-8 h-8 gradient-primary rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold">G</span>
               </div>
-              <span className="text-xl font-bold">GroceryMart</span>
+              <span className="text-xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">ILB MART</span>
             </div>
             <p className="text-gray-400 text-sm">
-              Fresh groceries delivered to your doorstep in minutes. Quality assured, always fresh.
+              Fresh groceries delivered to your doorstep in minutes. ILB MART — fresh, fast, trusted.
             </p>
             <div className="flex space-x-4">
               <Facebook className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer" />

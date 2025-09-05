@@ -30,9 +30,9 @@ export default function ProductCard({ product, showDiscount }: ProductCardProps)
 
   return (
     <Link href={`/products/${product.id}`}>
-      <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
+      <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-lg transition-all duration-200 group hover:-translate-y-0.5 h-full flex flex-col">
         {/* Image Container */}
-        <div className="relative aspect-square bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
+        <div className="relative aspect-square bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden max-w-full">
           <img
             src={product.image}
             alt={product.name}
@@ -68,7 +68,7 @@ export default function ProductCard({ product, showDiscount }: ProductCardProps)
         </div>
 
         {/* Content */}
-        <div className="p-4 space-y-3">
+        <div className="p-3 space-y-2 flex-1 flex flex-col justify-between">
           {/* Rating */}
           <div className="flex items-center space-x-1">
             <div className="flex items-center space-x-1">
@@ -79,7 +79,7 @@ export default function ProductCard({ product, showDiscount }: ProductCardProps)
           </div>
 
           {/* Product Name */}
-          <h3 className="font-semibold text-gray-800 line-clamp-2 text-sm leading-tight group-hover:text-purple-600 transition-colors">
+          <h3 className="font-semibold text-gray-800 line-clamp-2 text-sm leading-tight group-hover:text-green-600 transition-colors">
             {product.name}
           </h3>
           
@@ -87,7 +87,7 @@ export default function ProductCard({ product, showDiscount }: ProductCardProps)
           <p className="text-xs text-gray-500 font-medium">{product.unit}</p>
 
           {/* Price Section */}
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between mb-3">
             <div className="flex items-center space-x-2">
               <span className="font-bold text-lg text-gray-900">₹{product.price}</span>
               {product.originalPrice && (
@@ -97,14 +97,16 @@ export default function ProductCard({ product, showDiscount }: ProductCardProps)
           </div>
 
           {/* Add to Cart Button */}
-          <Button
-            className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold rounded-xl py-2 transition-all duration-300 shadow-md hover:shadow-lg"
-            size="sm"
-            onClick={handleAddToCart}
-          >
-            <Plus className="w-4 h-4 mr-1" />
-            Add
-          </Button>
+          <div>
+            <Button
+              className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold rounded-xl py-2 transition-all duration-300 shadow-md hover:shadow-lg"
+              size="sm"
+              onClick={handleAddToCart}
+            >
+              <Plus className="w-4 h-4 mr-1" />
+              Add
+            </Button>
+          </div>
         </div>
       </div>
     </Link>

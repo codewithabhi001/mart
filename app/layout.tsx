@@ -5,6 +5,9 @@ import { Toaster } from '@/components/ui/sonner';
 import { CartProvider } from '@/lib/context/cart-context';
 import { AuthProvider } from '@/lib/context/auth-context';
 import { LocationProvider } from '@/lib/context/location-context';
+import { ThemeProvider } from '@/components/theme-provider';
+import dynamic from 'next/dynamic';
+const ClientGuards = dynamic(() => import('@/components/client/client-guards'), { ssr: false });
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,16 +22,45 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Early inline fetch override to block known injected analytics (FullStory) before they run */}
+        <script dangerouslySetInnerHTML={{__html: `(function(){
+          try{
+            var orig = window.fetch;
+            window.fetch = function(){
+              try{
+                var input = arguments[0];
+                var url = '';
+                if(typeof input === 'string') url = input;
+                else if(input && input.url) url = input.url;
+                if(url && (url.indexOf('fullstory.com')!==-1 || url.indexOf('edge.fullstory.com')!==-1 || url.indexOf('static.fullstory.com')!==-1)){
+                  return Promise.resolve(new Response(null,{status:204,statusText:'No Content (blocked)'}));
+                }
+              }catch(e){}
+              try{
+                if(typeof orig === 'function') return orig.apply(this, arguments);
+                // if original fetch not available for some reason, resolve with empty 204 to avoid throwing
+                return Promise.resolve(new Response(null,{status:204,statusText:'No Content (fallback)'}));
+              }catch(e){
+                return Promise.resolve(new Response(null,{status:204,statusText:'No Content (error)'}));
+              }
+            };
+          }catch(e){}
+        })();`}} />
+      </head>
       <body className={inter.className}>
-        <AuthProvider>
-          <LocationProvider>
-            <CartProvider>
-              {children}
-              <Toaster />
-            </CartProvider>
-          </LocationProvider>
-        </AuthProvider>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+          <ClientGuards />
+          <AuthProvider>
+            <LocationProvider>
+              <CartProvider>
+                {children}
+                <Toaster />
+              </CartProvider>
+            </LocationProvider>
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

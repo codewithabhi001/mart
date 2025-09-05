@@ -10,6 +10,7 @@ import { useCart } from '@/lib/context/cart-context';
 import { availableCoupons } from '@/lib/data/coupons';
 import { toast } from 'sonner';
 import CouponSelector from './coupon-selector';
+import CartItemRow from './cart-item-row';
 
 export default function CartPage() {
   const { items, total, updateQuantity, removeItem } = useCart();
@@ -50,15 +51,17 @@ export default function CartPage() {
   if (items.length === 0) {
     return (
       <div className="container mx-auto px-4 py-16">
-        <div className="text-center space-y-4">
-          <ShoppingBag className="w-24 h-24 mx-auto text-gray-300" />
+        <div className="max-w-md mx-auto bg-white rounded-2xl shadow-lg p-8 text-center">
+          <div className="w-24 h-24 mx-auto bg-green-50 rounded-full flex items-center justify-center mb-4">
+            <ShoppingBag className="w-12 h-12 text-green-600" />
+          </div>
           <h2 className="text-2xl font-bold text-gray-800">Your cart is empty</h2>
-          <p className="text-gray-600">Add some products to get started</p>
-          <Link href="/products">
-            <Button className="bg-primary hover:bg-primary/90">
-              Continue Shopping
-            </Button>
-          </Link>
+          <p className="text-gray-600 mt-2">Looks like you haven&apos;t added anything to your cart yet.</p>
+          <div className="mt-6">
+            <Link href="/products">
+              <Button className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6">Start Shopping</Button>
+            </Link>
+          </div>
         </div>
       </div>
     );
@@ -72,64 +75,12 @@ export default function CartPage() {
         {/* Cart Items */}
         <div className="lg:col-span-2 space-y-4">
           {items.map((item) => (
-            <div key={item.product.id} className="bg-white rounded-xl p-6 border card-hover">
-              <div className="flex gap-4">
-                <img
-                  src={item.product.image}
-                  alt={item.product.name}
-                  className="w-20 h-20 object-cover rounded-lg bg-gray-50"
-                />
-                
-                <div className="flex-1">
-                  <h3 className="font-semibold text-gray-800 mb-1">{item.product.name}</h3>
-                  <p className="text-sm text-gray-600 mb-2">{item.product.unit}</p>
-                  
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-2">
-                      <span className="font-bold text-lg">₹{item.product.price}</span>
-                      {item.product.originalPrice && (
-                        <span className="text-sm text-gray-400 line-through">
-                          ₹{item.product.originalPrice}
-                        </span>
-                      )}
-                    </div>
-
-                    <div className="flex items-center space-x-3">
-                      <div className="flex items-center border rounded-lg">
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
-                          disabled={item.quantity <= 1}
-                          className="h-8 w-8 p-0"
-                        >
-                          <Minus className="w-4 h-4" />
-                        </Button>
-                        <span className="px-3 py-1 font-medium">{item.quantity}</span>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
-                          disabled={item.quantity >= item.product.stock}
-                          className="h-8 w-8 p-0"
-                        >
-                          <Plus className="w-4 h-4" />
-                        </Button>
-                      </div>
-
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => removeItem(item.product.id)}
-                        className="text-red-600 hover:text-red-700 h-8 w-8 p-0"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <CartItemRow
+              key={item.product.id}
+              item={item}
+              updateQuantity={updateQuantity}
+              removeItem={removeItem}
+            />
           ))}
         </div>
 
@@ -202,13 +153,15 @@ export default function CartPage() {
               </div>
             </div>
 
-            <Button 
-              size="lg" 
-              className="w-full mt-6 bg-primary hover:bg-primary/90"
-              disabled={items.length === 0}
-            >
-              Proceed to Checkout
-            </Button>
+            <Link href="/checkout">
+              <Button
+                size="lg"
+                className="w-full mt-6 bg-primary-green hover:bg-primary-green/90 text-white"
+                disabled={items.length === 0}
+              >
+                Proceed to Checkout
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

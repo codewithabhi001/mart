@@ -36,7 +36,7 @@ const loyaltyTiers = [
   { name: 'Bronze', minSpend: 0, cashback: '1%', color: 'bg-orange-500' },
   { name: 'Silver', minSpend: 5000, cashback: '2%', color: 'bg-gray-400' },
   { name: 'Gold', minSpend: 15000, cashback: '3%', color: 'bg-yellow-500' },
-  { name: 'Platinum', minSpend: 30000, cashback: '5%', color: 'bg-purple-500' },
+  { name: 'Platinum', minSpend: 30000, cashback: '5%', color: 'bg-emerald-600' },
 ];
 
 export default function OffersPage() {

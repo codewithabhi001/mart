@@ -43,7 +43,7 @@ export default function PaymentSelector({ selectedMethod, onSelect }: PaymentSel
     <RadioGroup value={selectedMethod} onValueChange={onSelect}>
       <div className="space-y-3">
         {paymentMethods.map((method) => (
-          <div key={method.id} className="flex items-center space-x-3 p-4 border rounded-lg hover:bg-gray-50">
+          <div key={method.id} className={`flex items-center space-x-3 p-4 border rounded-lg hover:bg-gray-50 ${selectedMethod === method.id ? 'border-green-300 bg-green-50' : ''}`}>
             <RadioGroupItem value={method.id} id={method.id} />
             <Label htmlFor={method.id} className="flex-1 cursor-pointer">
               <div className="flex items-center space-x-3">
@@ -52,7 +52,7 @@ export default function PaymentSelector({ selectedMethod, onSelect }: PaymentSel
                   <div className="flex items-center space-x-2">
                     <span className="font-medium">{method.name}</span>
                     {method.popular && (
-                      <span className="text-xs bg-primary text-white px-2 py-1 rounded">Popular</span>
+                      <span className="text-xs bg-primary-green text-white px-2 py-1 rounded">Popular</span>
                     )}
                   </div>
                   <p className="text-sm text-gray-600">{method.description}</p>

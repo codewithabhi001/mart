@@ -1,5 +1,7 @@
 'use client';
 
+"use client";
+
 import React, { useState, useMemo } from 'react';
 import { Filter, SlidersHorizontal } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -78,7 +80,7 @@ export default function ProductListing() {
       <div className="container mx-auto px-4 py-8">
         <Alert className="max-w-md mx-auto">
           <AlertDescription className="text-center">
-            Sorry! We don't deliver to your location yet. We'll be there soon!
+            Sorry! We don&apos;t deliver to your location yet. We&apos;ll be there soon!
           </AlertDescription>
         </Alert>
       </div>
@@ -161,7 +163,7 @@ export default function ProductListing() {
                 </p>
               </div>
               
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
                 {filteredProducts.map((product) => (
                   <ProductCard key={product.id} product={product} showDiscount />
                 ))}

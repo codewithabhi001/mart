@@ -76,7 +76,7 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="min-h-screen gradient-primary flex items-center justify-center p-4">
+    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-green-600 to-emerald-400">
       <div className="w-full max-w-md">
         {/* Header */}
         <div className="text-center mb-8">
@@ -84,7 +84,7 @@ export default function AuthPage() {
             <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center">
               <ShoppingCart className="w-6 h-6 text-primary" />
             </div>
-            <h1 className="text-3xl font-bold text-white">GroceryMart</h1>
+            <h1 className="text-3xl font-bold text-white">ILB MART</h1>
           </div>
           <p className="text-cream-medium">Fresh groceries delivered in minutes</p>
         </div>
@@ -134,7 +134,7 @@ export default function AuthPage() {
                         className="text-center text-lg h-12"
                       />
                       <p className="text-xs text-gray-500 mt-2 text-center">
-                        We'll send you an OTP for verification
+                        We&apos;ll send you an OTP for verification
                       </p>
                     </div>
                   </TabsContent>
@@ -158,7 +158,7 @@ export default function AuthPage() {
                         />
                       )}
                       <p className="text-xs text-gray-500 mt-2 text-center">
-                        {isSignup ? 'Create your account' : 'We\'ll send you an OTP'}
+                        {isSignup ? 'Create your account' : 'We\'ll send you an OTP'.replace("\'", "&apos;")}
                       </p>
                     </div>
                   </TabsContent>
@@ -167,7 +167,7 @@ export default function AuthPage() {
                 <Button
                   onClick={() => handleSendOtp(authType)}
                   disabled={(authType === 'phone' ? phone.length !== 10 : !email.includes('@')) || isLoading}
-                  className="w-full bg-primary hover:bg-primary/90 h-12 text-lg"
+                  className="w-full bg-primary-green hover:bg-primary-green/90 h-12 text-lg text-white"
                 >
                   {isLoading ? 'Sending...' : (isSignup ? 'Create Account' : 'Send OTP')}
                 </Button>
@@ -230,7 +230,7 @@ export default function AuthPage() {
                 <Button
                   onClick={handleVerifyOtp}
                   disabled={otp.length !== 4 || isLoading}
-                  className="w-full bg-primary hover:bg-primary/90 h-12 text-lg"
+                  className="w-full bg-primary-green hover:bg-primary-green/90 h-12 text-lg text-white"
                 >
                   {isLoading ? 'Verifying...' : 'Verify & Login'}
                 </Button>
