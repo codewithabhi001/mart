@@ -24,6 +24,7 @@ export default function Header() {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
   const isDark = mounted ? theme === 'dark' : false;
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
   const { user } = useAuth();
   const { currentLocation, isServiceAvailable } = useLocation();
 
