@@ -1,5 +1,7 @@
 'use client';
 
+"use client";
+
 import React, { useState } from 'react';
 import { ArrowLeft, Plus, Minus, Heart, Share2, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
