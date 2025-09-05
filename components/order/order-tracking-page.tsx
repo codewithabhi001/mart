@@ -183,11 +183,11 @@ export default function OrderTrackingPage({ orderId }: OrderTrackingPageProps) {
                       {demoOrder?.deliveryPartner?.charAt(0) ?? '?'}
                     </div>
                     <div>
-                      <h4 className="font-semibold text-lg">{demoOrder.deliveryPartner}</h4>
+                      <h4 className="font-semibold text-lg">{demoOrder?.deliveryPartner ?? '—'}</h4>
                       <p className="text-gray-600">Delivery Executive</p>
                       <div className="flex items-center space-x-1 mt-1">
                         <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                        <span className="text-sm font-medium">{demoOrder.rating}</span>
+                        <span className="text-sm font-medium">{demoOrder?.rating ?? '—'}</span>
                       </div>
                     </div>
                   </div>
