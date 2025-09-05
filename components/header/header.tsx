@@ -25,6 +25,16 @@ export default function Header() {
   useEffect(() => setMounted(true), []);
   const isDark = mounted ? theme === 'dark' : false;
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (showMobileMenu) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [showMobileMenu]);
   const { user } = useAuth();
   const { currentLocation, isServiceAvailable } = useLocation();
 
