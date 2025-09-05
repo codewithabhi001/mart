@@ -63,19 +63,19 @@ export default function OrderTrackingPage({ orderId }: OrderTrackingPageProps) {
           {/* Order Status */}
           <div className="lg:col-span-2 space-y-6">
             {/* Live Status Card */}
-            <Card className="shadow-lg border-blue-200 bg-gradient-to-r from-blue-50 to-purple-50">
+            <Card className="shadow-lg border-green-200 bg-gradient-to-r from-green-50 to-emerald-50">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <CardTitle className="flex items-center space-x-2">
                     <span>Order #{orderId}</span>
                   </CardTitle>
-                  <Badge className="bg-blue-500 text-white">On the Way</Badge>
+                  <Badge className="bg-green-500 text-white">On the Way</Badge>
                 </div>
               </CardHeader>
               <CardContent className="space-y-6">
                 {/* ETA Section */}
                 <div className="text-center p-6 bg-white rounded-2xl shadow-sm">
-                  <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Clock className="w-8 h-8 text-white" />
                   </div>
                   <h3 className="text-3xl font-bold text-gray-800 mb-2">{estimatedTime} mins</h3>
@@ -106,7 +106,7 @@ export default function OrderTrackingPage({ orderId }: OrderTrackingPageProps) {
                         )}
                       </div>
                       {index === currentStatus && (
-                        <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse"></div>
+                        <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
                       )}
                     </div>
                   ))}
@@ -118,7 +118,7 @@ export default function OrderTrackingPage({ orderId }: OrderTrackingPageProps) {
             <Card className="shadow-lg">
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
-                  <User className="w-5 h-5 text-purple-600" />
+                  <User className="w-5 h-5 text-green-600" />
                   <span>Your Delivery Partner</span>
                 </CardTitle>
               </CardHeader>
@@ -151,9 +151,9 @@ export default function OrderTrackingPage({ orderId }: OrderTrackingPageProps) {
                 <CardTitle>Live Tracking</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="h-64 bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl flex items-center justify-center">
+                <div className="h-64 bg-gradient-to-br from-green-100 to-emerald-100 rounded-2xl flex items-center justify-center">
                   <div className="text-center">
-                    <MapPin className="w-12 h-12 text-purple-600 mx-auto mb-4" />
+                    <MapPin className="w-12 h-12 text-green-600 mx-auto mb-4" />
                     <p className="text-gray-600">Live map tracking would appear here</p>
                     <p className="text-sm text-gray-500 mt-2">Your delivery partner is 2.5 km away</p>
                   </div>
@@ -195,7 +195,7 @@ export default function OrderTrackingPage({ orderId }: OrderTrackingPageProps) {
             <Card className="shadow-lg">
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
-                  <MapPin className="w-5 h-5 text-purple-600" />
+                  <MapPin className="w-5 h-5 text-green-600" />
                   <span>Delivery Address</span>
                 </CardTitle>
               </CardHeader>
