@@ -1,12 +1,9 @@
 import Header from '@/components/header/header';
-import Header from '@/components/header/header';
 import OrderTrackingPage from '@/components/order/order-tracking-page';
 import Footer from '@/components/footer/footer';
 
 interface OrderTrackingProps {
-  params: {
-    id: string;
-  };
+  params: { id: string };
 }
 
 export default function OrderTracking({ params }: OrderTrackingProps) {
