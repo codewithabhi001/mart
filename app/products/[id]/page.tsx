@@ -1,4 +1,6 @@
 import Header from '@/components/header/header';
+export const dynamic = 'force-dynamic';
+
 import ProductDetails from '@/components/products/product-details';
 import Footer from '@/components/footer/footer';
 import { products } from '@/lib/data/products';
