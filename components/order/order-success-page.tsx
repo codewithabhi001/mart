@@ -63,11 +63,11 @@ export default function OrderSuccessPage() {
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link href={`/orders/${orderId}`}>
-            <Button className="bg-primary hover:bg-primary/90">
-              <Package className="w-4 h-4 mr-2" />
-              Track Order
-            </Button>
-          </Link>
+    <Button className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white">
+      <Package className="w-4 h-4 mr-2" />
+      Track Order
+    </Button>
+  </Link>
           
           <Button variant="outline" onClick={downloadInvoice}>
             <Download className="w-4 h-4 mr-2" />
