@@ -23,7 +23,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+      <head>
         {/* Early inline fetch override to block known injected analytics (FullStory) before they run */}
         <script dangerouslySetInnerHTML={{__html: `(function(){
           try{
@@ -42,6 +42,8 @@ export default function RootLayout({
             };
           }catch(e){}
         })();`}} />
+      </head>
+      <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <ClientGuards />
           <AuthProvider>
