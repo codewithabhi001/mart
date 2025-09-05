@@ -74,14 +74,18 @@ export default function CartPage() {
           {items.map((item) => (
             <div key={item.product.id} className="bg-white rounded-xl p-6 border card-hover">
               <div className="flex gap-4">
-                <img
-                  src={item.product.image}
-                  alt={item.product.name}
-                  className="w-20 h-20 object-cover rounded-lg bg-gray-50"
-                />
-                
+                <a href={`/products/${item.product.id}`} className="block w-20 h-20 shrink-0">
+                  <img
+                    src={item.product.image}
+                    alt={item.product.name}
+                    className="w-20 h-20 object-cover rounded-lg bg-gray-50"
+                  />
+                </a>
+
                 <div className="flex-1">
-                  <h3 className="font-semibold text-gray-800 mb-1">{item.product.name}</h3>
+                  <a href={`/products/${item.product.id}`} className="block">
+                    <h3 className="font-semibold text-gray-800 mb-1">{item.product.name}</h3>
+                  </a>
                   <p className="text-sm text-gray-600 mb-2">{item.product.unit}</p>
                   
                   <div className="flex items-center justify-between">
