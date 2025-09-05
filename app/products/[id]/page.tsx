@@ -20,8 +20,6 @@ export default function ProductPage({ params }: ProductPageProps) {
   );
 }
 
-import { products } from '@/lib/data/products';
-
 export function generateStaticParams() {
   return products.map((p) => ({ id: p.id }));
 }
