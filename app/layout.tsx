@@ -6,7 +6,8 @@ import { CartProvider } from '@/lib/context/cart-context';
 import { AuthProvider } from '@/lib/context/auth-context';
 import { LocationProvider } from '@/lib/context/location-context';
 import { ThemeProvider } from '@/components/theme-provider';
-import FetchGuard from '@/components/client/fetch-guard';
+import dynamic from 'next/dynamic';
+const FetchGuard = dynamic(() => import('@/components/client/fetch-guard'), { ssr: false });
 
 const inter = Inter({ subsets: ['latin'] });
 
