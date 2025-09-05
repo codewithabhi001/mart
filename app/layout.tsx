@@ -26,6 +26,7 @@ export default function RootLayout({
           <LocationProvider>
             <CartProvider>
               <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+                <FetchGuard />
                 {children}
                 <Toaster />
               </ThemeProvider>
