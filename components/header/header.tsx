@@ -21,6 +21,9 @@ export default function Header() {
   const [isListening, setIsListening] = useState(false);
   const { itemCount } = useCart();
   const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  const isDark = mounted ? theme === 'dark' : false;
   const { user } = useAuth();
   const { currentLocation, isServiceAvailable } = useLocation();
 
