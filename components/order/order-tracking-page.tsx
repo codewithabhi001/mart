@@ -224,7 +224,7 @@ export default function OrderTrackingPage({ orderId }: OrderTrackingPageProps) {
                 <CardTitle>Order Items</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                {(demoOrder?.items || []).map((item, index) => {
+                {(demoOrder?.items || []).map((item: any, index: number) => {
                   const prod = (item && (item.product || item)) || {};
                   const name = prod.name || item.name || 'Item';
                   const image = prod.image || item.image || '';
