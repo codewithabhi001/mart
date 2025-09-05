@@ -125,7 +125,7 @@ export default function OrderTrackingPage({ orderId }: OrderTrackingPageProps) {
               <CardContent>
                 <div className="flex items-center justify-between p-4 bg-gray-50 rounded-2xl">
                   <div className="flex items-center space-x-4">
-                    <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center text-white font-bold text-xl">
+                    <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center text-white font-bold text-xl">
                       {demoOrder.deliveryPartner.charAt(0)}
                     </div>
                     <div>
