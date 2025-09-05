@@ -19,8 +19,15 @@ export default function CheckoutPage() {
   const { items, total, clearCart } = useCart();
   const { user } = useAuth();
   const router = useRouter();
-  const [selectedAddress, setSelectedAddress] = useState(user?.addresses.find(a => a.isDefault)?.id || '');
+  const [selectedAddress, setSelectedAddress] = useState(user?.addresses?.find((a: any) => a.isDefault)?.id || '');
   const [selectedPayment, setSelectedPayment] = useState('cod');
+
+  useEffect(() => {
+    if (user && (!selectedAddress || selectedAddress === '')) {
+      const defaultAddr = user.addresses?.find((a: any) => a.isDefault)?.id || user.addresses?.[0]?.id || '';
+      if (defaultAddr) setSelectedAddress(defaultAddr);
+    }
+  }, [user]);
   const [isPlacingOrder, setIsPlacingOrder] = useState(false);
   const [deliveryInstructions, setDeliveryInstructions] = useState('');
 
