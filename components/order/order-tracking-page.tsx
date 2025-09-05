@@ -34,19 +34,30 @@ export default function OrderTrackingPage({ orderId }: OrderTrackingPageProps) {
     return () => clearInterval(timer);
   }, []);
 
-  const demoOrder = {
-    id: orderId,
-    items: [
-      { name: 'Fresh Bananas', quantity: 2, price: 40, image: 'https://images.pexels.com/photos/2872755/pexels-photo-2872755.jpeg?auto=compress&cs=tinysrgb&w=400' },
-      { name: 'Whole Milk', quantity: 1, price: 60, image: 'https://images.pexels.com/photos/248412/pexels-photo-248412.jpeg?auto=compress&cs=tinysrgb&w=400' },
-      { name: 'Brown Bread', quantity: 1, price: 45, image: 'https://images.pexels.com/photos/209206/pexels-photo-209206.jpeg?auto=compress&cs=tinysrgb&w=400' },
-    ],
-    total: 145,
-    address: '123 Main Street, Mumbai, Maharashtra 400001',
-    deliveryPartner: 'Raj Kumar',
-    phone: '+91 98765 43210',
-    rating: 4.8,
-  };
+  // Try to load real order from localStorage
+  let demoOrder = null as any;
+  try {
+    const orders = JSON.parse(localStorage.getItem('grocery-orders') || 'null') || [];
+    demoOrder = orders.find((o: any) => o.id === orderId) || null;
+  } catch (e) {
+    demoOrder = null;
+  }
+
+  if (!demoOrder) {
+    demoOrder = {
+      id: orderId,
+      items: [
+        { name: 'Fresh Bananas', quantity: 2, price: 40, image: 'https://images.pexels.com/photos/2872755/pexels-photo-2872755.jpeg?auto=compress&cs=tinysrgb&w=400' },
+        { name: 'Whole Milk', quantity: 1, price: 60, image: 'https://images.pexels.com/photos/248412/pexels-photo-248412.jpeg?auto=compress&cs=tinysrgb&w=400' },
+        { name: 'Brown Bread', quantity: 1, price: 45, image: 'https://images.pexels.com/photos/209206/pexels-photo-209206.jpeg?auto=compress&cs=tinysrgb&w=400' },
+      ],
+      total: 145,
+      address: '123 Main Street, Mumbai, Maharashtra 400001',
+      deliveryPartner: 'Raj Kumar',
+      phone: '+91 98765 43210',
+      rating: 4.8,
+    };
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
