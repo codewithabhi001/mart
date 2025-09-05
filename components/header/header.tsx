@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { MapPin, Search, ShoppingCart, User, Menu, Mic, Heart, Package } from 'lucide-react';
+import { MapPin, Search, ShoppingCart, User, Menu, Mic, Heart, Package, Sun, Moon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
