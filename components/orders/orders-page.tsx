@@ -57,9 +57,9 @@ export default function OrdersPage() {
       case 'delivered':
         return <Badge className="bg-green-500">Delivered</Badge>;
       case 'on-the-way':
-        return <Badge className="bg-blue-500">On the Way</Badge>;
+        return <Badge className="bg-green-500">On the Way</Badge>;
       case 'preparing':
-        return <Badge className="bg-orange-500">Preparing</Badge>;
+        return <Badge className="bg-amber-500">Preparing</Badge>;
       default:
         return <Badge variant="secondary">Pending</Badge>;
     }
