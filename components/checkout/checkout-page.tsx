@@ -100,7 +100,7 @@ export default function CheckoutPage() {
               </CardHeader>
               <CardContent>
                 <AddressSelector
-                  addresses={user.addresses}
+                  addresses={user?.addresses || []}
                   selectedId={selectedAddress}
                   onSelect={setSelectedAddress}
                 />
