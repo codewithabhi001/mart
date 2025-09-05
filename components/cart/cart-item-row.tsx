@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Minus, Plus, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { ProductCartItem } from '@/lib/types';
+import { CartItem } from '@/lib/types';
 
 interface Props {
   item: ProductCartItem;
