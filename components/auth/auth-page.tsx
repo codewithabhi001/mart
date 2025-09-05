@@ -167,7 +167,7 @@ export default function AuthPage() {
                 <Button
                   onClick={() => handleSendOtp(authType)}
                   disabled={(authType === 'phone' ? phone.length !== 10 : !email.includes('@')) || isLoading}
-                  className="w-full bg-primary hover:bg-primary/90 h-12 text-lg"
+                  className="w-full bg-primary-green hover:bg-primary-green/90 h-12 text-lg text-white"
                 >
                   {isLoading ? 'Sending...' : (isSignup ? 'Create Account' : 'Send OTP')}
                 </Button>
@@ -230,7 +230,7 @@ export default function AuthPage() {
                 <Button
                   onClick={handleVerifyOtp}
                   disabled={otp.length !== 4 || isLoading}
-                  className="w-full bg-primary hover:bg-primary/90 h-12 text-lg"
+                  className="w-full bg-primary-green hover:bg-primary-green/90 h-12 text-lg text-white"
                 >
                   {isLoading ? 'Verifying...' : 'Verify & Login'}
                 </Button>
