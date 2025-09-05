@@ -114,7 +114,7 @@ export default function ProfilePage() {
               ) : (
                 <div className="text-center p-8 text-gray-500">
                   <p className="mb-3">You have no orders yet.</p>
-                  <Button className="bg-primary-green text-white">Start Shopping</Button>
+                  <a href="/products" className="inline-block"><Button className="bg-primary-green text-white">Start Shopping</Button></a>
                 </div>
               )}
             </CardContent>
