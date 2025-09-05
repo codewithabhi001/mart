@@ -68,7 +68,7 @@ export default function ProductCard({ product, showDiscount }: ProductCardProps)
         </div>
 
         {/* Content */}
-        <div className="p-3 space-y-2">
+        <div className="p-3 space-y-2 flex-1 flex flex-col justify-between">
           {/* Rating */}
           <div className="flex items-center space-x-1">
             <div className="flex items-center space-x-1">
