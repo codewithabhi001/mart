@@ -21,18 +21,43 @@ const orderStatuses = [
 
 export default function OrderTrackingPage({ orderId }: OrderTrackingPageProps) {
   const router = useRouter();
-  const [currentStatus, setCurrentStatus] = useState(2); // On the way
+  const [currentStatus, setCurrentStatus] = useState(2); // 0:confirmed,1:preparing,2:on-the-way,3:delivered
   const [estimatedTime, setEstimatedTime] = useState(8);
   const [progress, setProgress] = useState(75);
 
   useEffect(() => {
+    // load status from stored order if available
+    try {
+      const orders = JSON.parse(localStorage.getItem('grocery-orders') || 'null') || [];
+      const o = orders.find((x: any) => x.id === orderId);
+      if (o && o.status) {
+        const idx = ['confirmed','preparing','on-the-way','delivered'].indexOf(o.status);
+        if (idx >= 0) setCurrentStatus(idx);
+      }
+    } catch(e) {}
+
+    // Simulate progression every 10s for demo
     const timer = setInterval(() => {
       setEstimatedTime(prev => Math.max(0, prev - 1));
-      setProgress(prev => Math.min(100, prev + 2));
-    }, 60000); // Update every minute
+      setProgress(prev => Math.min(100, prev + 5));
+
+      setCurrentStatus((prev) => {
+        const next = Math.min(3, prev + 1);
+        // persist to localStorage
+        try {
+          const orders = JSON.parse(localStorage.getItem('grocery-orders') || 'null') || [];
+          const idx = orders.findIndex((x: any) => x.id === orderId);
+          if (idx >= 0) {
+            orders[idx].status = ['confirmed','preparing','on-the-way','delivered'][next];
+            localStorage.setItem('grocery-orders', JSON.stringify(orders));
+          }
+        } catch(e) {}
+        return next;
+      });
+    }, 10000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [orderId]);
 
   // Try to load real order from localStorage
   let demoOrder = null as any;
