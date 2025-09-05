@@ -11,6 +11,7 @@ import { useAuth } from '@/lib/context/auth-context';
 import { useLocation } from '@/lib/context/location-context';
 import LocationModal from './location-modal';
 import UserMenu from './user-menu';
+import { useTheme } from 'next-themes';
 
 export default function Header() {
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
