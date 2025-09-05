@@ -91,6 +91,15 @@ export default function Header() {
               </Button>
             </div>
 
+            {/* Desktop Nav */}
+            <nav className="hidden md:flex items-center space-x-4 mr-6">
+              <Link href="/" className="text-sm text-gray-700 hover:text-green-600">Home</Link>
+              <Link href="/products" className="text-sm text-gray-700 hover:text-green-600">Products</Link>
+              <Link href="/offers" className="text-sm text-gray-700 hover:text-green-600">Offers</Link>
+              <Link href="/orders" className="text-sm text-gray-700 hover:text-green-600">Orders</Link>
+              <Link href="/help" className="text-sm text-gray-700 hover:text-green-600">Help</Link>
+            </nav>
+
             {/* Search */}
             <div className="flex-1 max-w-md mx-8">
               <div className="relative">
