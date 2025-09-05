@@ -224,7 +224,7 @@ export default function OrderTrackingPage({ orderId }: OrderTrackingPageProps) {
                 <CardTitle>Order Items</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                {(demoOrder.items || []).map((item, index) => (
+                {(demoOrder?.items || []).map((item, index) => (
                   <div key={index} className="flex items-center space-x-3 p-3 bg-gray-50 rounded-xl">
                     <img
                       src={item.image}
