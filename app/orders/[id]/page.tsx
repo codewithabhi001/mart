@@ -2,6 +2,8 @@
 
 "use client";
 
+export const dynamic = 'force-dynamic';
+
 import React from 'react';
 import SiteHeader from '@/components/header/header';
 import OrderTrackingPage from '@/components/order/order-tracking-page';
