@@ -240,7 +240,7 @@ export default function OrderTrackingPage({ orderId }: OrderTrackingPageProps) {
                 ))}
                 <div className="border-t pt-3 flex justify-between font-bold text-lg">
                   <span>Total</span>
-                  <span>₹{demoOrder.total}</span>
+                  <span>₹{demoOrder?.total ?? '—'}</span>
                 </div>
               </CardContent>
             </Card>
