@@ -87,8 +87,8 @@ export default function CheckoutPage() {
 
     clearCart();
     toast.success('Order placed successfully!');
-    // Redirect straight to order tracking
-    router.push(`/orders/${orderId}`);
+    // Redirect to order success page first, user can tap Track Order to go to tracking
+    router.push(`/order-success?orderId=${orderId}`);
   };
 
   return (
