@@ -51,15 +51,17 @@ export default function CartPage() {
   if (items.length === 0) {
     return (
       <div className="container mx-auto px-4 py-16">
-        <div className="text-center space-y-4">
-          <ShoppingBag className="w-24 h-24 mx-auto text-gray-300" />
+        <div className="max-w-md mx-auto bg-white rounded-2xl shadow-lg p-8 text-center">
+          <div className="w-24 h-24 mx-auto bg-green-50 rounded-full flex items-center justify-center mb-4">
+            <ShoppingBag className="w-12 h-12 text-green-600" />
+          </div>
           <h2 className="text-2xl font-bold text-gray-800">Your cart is empty</h2>
-          <p className="text-gray-600">Add some products to get started</p>
-          <Link href="/products">
-            <Button className="bg-primary-green hover:bg-primary-green/90 text-white">
-              Continue Shopping
-            </Button>
-          </Link>
+          <p className="text-gray-600 mt-2">Looks like you haven't added anything to your cart yet.</p>
+          <div className="mt-6">
+            <Link href="/products">
+              <Button className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6">Start Shopping</Button>
+            </Link>
+          </div>
         </div>
       </div>
     );
