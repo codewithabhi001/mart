@@ -19,15 +19,15 @@ export default function CategorySection() {
               href={`/products?category=${encodeURIComponent(category.name)}`}
               className="group"
             >
-              <div className="text-center space-y-3 card-hover bg-cream-light p-6 rounded-xl border">
-                <div className="w-16 h-16 mx-auto rounded-full overflow-hidden bg-gradient-to-br from-primary/20 to-accent/20">
+              <div className="text-center p-4 rounded-xl border bg-white shadow-sm hover:shadow-md transition-all h-full flex flex-col items-center justify-center">
+                <div className="w-20 h-20 mx-auto rounded-full overflow-hidden bg-white flex items-center justify-center border">
                   <img
                     src={category.image}
                     alt={category.name}
-                    className="w-full h-full object-cover"
+                    className="w-12 h-12 object-cover rounded-full"
                   />
                 </div>
-                <h3 className="font-semibold text-sm text-gray-800 group-hover:text-primary transition-colors">
+                <h3 className="font-semibold text-sm text-gray-800 mt-3 group-hover:text-green-600 transition-colors">
                   {category.name}
                 </h3>
               </div>
