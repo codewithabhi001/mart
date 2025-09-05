@@ -8,6 +8,7 @@ import { LocationProvider } from '@/lib/context/location-context';
 import { ThemeProvider } from '@/components/theme-provider';
 import dynamic from 'next/dynamic';
 const FetchGuard = dynamic(() => import('@/components/client/fetch-guard'), { ssr: false });
+const ErrorGuard = dynamic(() => import('@/components/client/error-guard'), { ssr: false });
 
 const inter = Inter({ subsets: ['latin'] });
 
