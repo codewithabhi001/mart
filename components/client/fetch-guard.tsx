@@ -8,13 +8,28 @@ export default function FetchGuard() {
     const origFetch = window.fetch;
     if (!origFetch) return;
 
-    // Wrap fetch to catch and suppress network errors from third-party scripts
+    // Wrap fetch to intercept problematic analytics/third-party calls (e.g., FullStory)
     window.fetch = async (...args: any[]) => {
       try {
+        const input = args[0];
+        let url = '';
+        try {
+          if (typeof input === 'string') url = input;
+          else if (input && typeof input.url === 'string') url = input.url;
+        } catch (e) {
+          url = '';
+        }
+
+        // Block known noisy analytics endpoints in dev/preview to avoid CORS/fetch errors
+        const blocked = ['fullstory.com', 'edge.fullstory.com', 'static.fullstory.com'];
+        if (url && blocked.some((b) => url.includes(b))) {
+          // return a minimal successful empty Response
+          return new Response(null, { status: 204, statusText: 'No Content (blocked)' });
+        }
+
         return await origFetch(...args);
       } catch (err) {
-        // Avoid noisy uncaught errors from external scripts (e.g., analytics) in dev
-        // Log a short warning and return a synthetic Response so callers can handle gracefully
+        // Suppress noisy fetch errors from 3rd-party scripts
         // eslint-disable-next-line no-console
         console.warn('[fetch-guard] suppressed fetch error', err);
         try {
