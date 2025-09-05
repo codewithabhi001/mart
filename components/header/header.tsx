@@ -182,7 +182,7 @@ export default function Header() {
           {showMobileMenu && (
             <div className="fixed inset-0 z-[1000] md:hidden">
               <div className="absolute inset-0 bg-black/50" onClick={() => setShowMobileMenu(false)} />
-              <div className="absolute top-0 right-0 w-72 h-full bg-white dark:bg-gray-900 shadow-lg p-6 overflow-y-auto">
+              <div className="absolute top-0 right-0 w-full sm:w-72 h-full bg-white dark:bg-gray-900 shadow-lg p-6 overflow-y-auto">
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center space-x-3">
                     <div className="w-10 h-10 bg-gradient-to-r from-green-600 to-emerald-600 rounded-lg flex items-center justify-center text-white font-bold">IL</div>
