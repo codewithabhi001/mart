@@ -38,7 +38,13 @@ export default function RootLayout({
                   return Promise.resolve(new Response(null,{status:204,statusText:'No Content (blocked)'}));
                 }
               }catch(e){}
-              return orig.apply(this, arguments);
+              try{
+                if(typeof orig === 'function') return orig.apply(this, arguments);
+                // if original fetch not available for some reason, resolve with empty 204 to avoid throwing
+                return Promise.resolve(new Response(null,{status:204,statusText:'No Content (fallback)'}));
+              }catch(e){
+                return Promise.resolve(new Response(null,{status:204,statusText:'No Content (error)'}));
+              }
             };
           }catch(e){}
         })();`}} />
