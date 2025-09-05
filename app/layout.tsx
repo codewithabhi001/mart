@@ -43,9 +43,7 @@ export default function RootLayout({
           }catch(e){}
         })();`}} />
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-          <FetchGuard />
-          {/* Suppress noisy errors from injected analytics in preview */}
-          <ErrorGuard />
+          <ClientGuards />
           <AuthProvider>
             <LocationProvider>
               <CartProvider>
