@@ -48,7 +48,7 @@ export default function AddressForm({ address, onClose, onSave }: AddressFormPro
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <Label htmlFor="type">Address Type</Label>
-            <Select value={formData.type} onValueChange={(value) => setFormData({...formData, type: value})}>
+            <Select value={formData.type} onValueChange={(value) => setFormData({...formData, type: value as 'Home' | 'Work' | 'Other'})}>
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>
