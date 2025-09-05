@@ -123,7 +123,7 @@ export default function AddressForm({ address, onClose, onSave }: AddressFormPro
             <Button type="button" variant="outline" onClick={onClose} className="flex-1">
               Cancel
             </Button>
-            <Button type="submit" className="flex-1 bg-primary hover:bg-primary/90">
+            <Button type="submit" className="flex-1 bg-primary-green hover:bg-primary-green/90 text-white">
               Save Address
             </Button>
           </div>
