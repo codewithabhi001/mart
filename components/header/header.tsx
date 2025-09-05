@@ -195,13 +195,14 @@ export default function Header() {
                 </div>
 
                 <nav className="space-y-3">
-                  <a href="/" className="block py-3 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800">Home</a>
-                  <a href="/products" className="block py-3 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800">Products</a>
-                  <a href="/offers" className="block py-3 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800">Offers</a>
-                  <a href="/orders" className="block py-3 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800">Orders</a>
-                  <a href="/help" className="block py-3 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800">Help</a>
-                  <a href="/profile" className="block py-3 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800">Profile</a>
-                  <a href="/cart" className="block py-3 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800">Cart</a>
+                  <Link href="/" onClick={() => setShowMobileMenu(false)} className="block py-3 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800">Home</Link>
+                  <Link href="/products" onClick={() => setShowMobileMenu(false)} className="block py-3 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800">Products</Link>
+                  <Link href="/offers" onClick={() => setShowMobileMenu(false)} className="block py-3 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800">Offers</Link>
+                  <Link href="/orders" onClick={() => setShowMobileMenu(false)} className="block py-3 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800">Orders</Link>
+                  <Link href="/help" onClick={() => setShowMobileMenu(false)} className="block py-3 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800">Help</Link>
+                  <Link href="/wishlist" onClick={() => setShowMobileMenu(false)} className="block py-3 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800">Wishlist</Link>
+                  <Link href="/profile" onClick={() => setShowMobileMenu(false)} className="block py-3 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800">Profile</Link>
+                  <Link href="/cart" onClick={() => setShowMobileMenu(false)} className="block py-3 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800">Cart</Link>
                 </nav>
 
                 <div className="mt-6">
