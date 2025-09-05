@@ -33,7 +33,9 @@ export default function FetchGuard() {
         }
 
         try {
-          return await origFetch(...args);
+          // call original fetch via apply to avoid TS overload spread issues
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          return await (origFetch as any).apply(window, args);
         } catch (innerErr) {
           // network or CORS error from third-party; don't rethrow, return an empty response
           // eslint-disable-next-line no-console
