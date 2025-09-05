@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { CartItem } from '@/lib/types';
 
 interface Props {
-  item: ProductCartItem;
+  item: CartItem;
   updateQuantity: (id: string, qty: number) => void;
   removeItem: (id: string) => void;
 }
