@@ -1,13 +1,17 @@
 'use client';
 
-import React from 'react';
+"use client";
+
+import React, { useEffect, useState } from 'react';
 import { ShoppingCart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useTheme } from 'next-themes';
 
 export default function SplashScreen() {
   const { theme, setTheme } = useTheme();
-  const isDark = theme === 'dark';
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  const isDark = mounted ? theme === 'dark' : false;
 
   return (
     <div className={`min-h-screen flex items-center justify-center transition-colors duration-500 ${
