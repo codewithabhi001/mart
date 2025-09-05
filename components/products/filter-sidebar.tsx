@@ -16,7 +16,7 @@ interface FilterSidebarProps {
 }
 
 export default function FilterSidebar({ filters, setFilters }: FilterSidebarProps) {
-  const brands = [...new Set(products.map(p => p.brand))];
+  const brands = Array.from(new Set(products.map((p) => p.brand)));
 
   const updateBrands = (brand: string, checked: boolean) => {
     const newBrands = checked
