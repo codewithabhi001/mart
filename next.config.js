@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  // Removed `output: 'export'` because static export requires generateStaticParams for dynamic routes
+  // and prevents runtime dynamic pages like order tracking that rely on localStorage and client routing.
   eslint: {
     ignoreDuringBuilds: true,
   },
