@@ -28,7 +28,7 @@ export default function AddressSelector({ addresses, selectedId, onSelect }: Add
                 <div className="flex items-center space-x-2">
                   <span className="font-medium">{address.type}</span>
                   {address.isDefault && (
-                    <span className="text-xs bg-primary text-white px-2 py-1 rounded">Default</span>
+                    <span className="text-xs bg-primary-green text-white px-2 py-1 rounded">Default</span>
                   )}
                 </div>
                 <p className="text-sm text-gray-600">{address.street}</p>
