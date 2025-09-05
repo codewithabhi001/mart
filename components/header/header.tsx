@@ -191,35 +191,59 @@ export default function Header() {
           {/* Mobile Menu Overlay */}
           {showMobileMenu && (
             <div className="fixed inset-0 z-[1000] md:hidden">
-              <div className="absolute inset-0 bg-black/50" onClick={() => setShowMobileMenu(false)} />
-              <div className="absolute top-0 right-0 w-full sm:w-72 h-full bg-white dark:bg-gray-900 shadow-lg p-6 overflow-y-auto">
-                <div className="flex items-center justify-between mb-6">
+              <div className="absolute inset-0 bg-black/60" onClick={() => setShowMobileMenu(false)} />
+              <div className="absolute inset-y-0 left-0 w-full sm:w-80 h-full bg-white dark:bg-gray-900 shadow-xl p-4 overflow-y-auto">
+                <div className="flex items-center justify-between mb-6 px-2">
                   <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-gradient-to-r from-green-600 to-emerald-600 rounded-lg flex items-center justify-center text-white font-bold">IL</div>
+                    <div className="w-12 h-12 bg-gradient-to-r from-green-600 to-emerald-600 rounded-lg flex items-center justify-center text-white font-bold">IL</div>
                     <div>
-                      <div className="font-semibold">ILB MART</div>
+                      <div className="font-semibold text-lg">ILB MART</div>
                       <div className="text-xs text-gray-500">Delivering to {currentLocation?.area || 'your area'}</div>
                     </div>
                   </div>
                   <Button variant="ghost" onClick={() => setShowMobileMenu(false)}>Close</Button>
                 </div>
 
-                <nav className="space-y-3">
-                  <Link href="/" onClick={() => setShowMobileMenu(false)} className="block py-3 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800">Home</Link>
-                  <Link href="/products" onClick={() => setShowMobileMenu(false)} className="block py-3 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800">Products</Link>
-                  <Link href="/offers" onClick={() => setShowMobileMenu(false)} className="block py-3 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800">Offers</Link>
-                  <Link href="/orders" onClick={() => setShowMobileMenu(false)} className="block py-3 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800">Orders</Link>
-                  <Link href="/help" onClick={() => setShowMobileMenu(false)} className="block py-3 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800">Help</Link>
-                  <Link href="/wishlist" onClick={() => setShowMobileMenu(false)} className="block py-3 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800">Wishlist</Link>
-                  <Link href="/profile" onClick={() => setShowMobileMenu(false)} className="block py-3 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800">Profile</Link>
-                  <Link href="/cart" onClick={() => setShowMobileMenu(false)} className="block py-3 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800">Cart</Link>
+                <nav className="space-y-2 px-2">
+                  <Link href="/" onClick={() => setShowMobileMenu(false)} className="flex items-center space-x-3 py-3 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                    <Package className="w-5 h-5 text-green-600" />
+                    <span>Home</span>
+                  </Link>
+                  <Link href="/products" onClick={() => setShowMobileMenu(false)} className="flex items-center space-x-3 py-3 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                    <Search className="w-5 h-5 text-green-600" />
+                    <span>Products</span>
+                  </Link>
+                  <Link href="/offers" onClick={() => setShowMobileMenu(false)} className="flex items-center space-x-3 py-3 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                    <Heart className="w-5 h-5 text-green-600" />
+                    <span>Offers</span>
+                  </Link>
+                  <Link href="/orders" onClick={() => setShowMobileMenu(false)} className="flex items-center space-x-3 py-3 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                    <Package className="w-5 h-5 text-green-600" />
+                    <span>Orders</span>
+                  </Link>
+                  <Link href="/help" onClick={() => setShowMobileMenu(false)} className="flex items-center space-x-3 py-3 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                    <MapPin className="w-5 h-5 text-green-600" />
+                    <span>Help</span>
+                  </Link>
+                  <Link href="/wishlist" onClick={() => setShowMobileMenu(false)} className="flex items-center space-x-3 py-3 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                    <Heart className="w-5 h-5 text-green-600" />
+                    <span>Wishlist</span>
+                  </Link>
+                  <Link href="/profile" onClick={() => setShowMobileMenu(false)} className="flex items-center space-x-3 py-3 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                    <User className="w-5 h-5 text-green-600" />
+                    <span>Profile</span>
+                  </Link>
+                  <Link href="/cart" onClick={() => setShowMobileMenu(false)} className="flex items-center space-x-3 py-3 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                    <ShoppingCart className="w-5 h-5 text-green-600" />
+                    <span>Cart</span>
+                  </Link>
                 </nav>
 
-                <div className="mt-6">
+                <div className="mt-6 px-2">
                   {user ? (
-                    <Button className="w-full bg-primary-green text-white" onClick={() => { setShowMobileMenu(false); window.location.href = '/profile'; }}>My Account</Button>
+                    <Button className="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white" onClick={() => { setShowMobileMenu(false); window.location.href = '/profile'; }}>My Account</Button>
                   ) : (
-                    <Button className="w-full bg-primary-green text-white" onClick={() => { setShowMobileMenu(false); window.location.href = '/login'; }}>Login</Button>
+                    <Button className="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white" onClick={() => { setShowMobileMenu(false); window.location.href = '/login'; }}>Login</Button>
                   )}
                 </div>
               </div>
