@@ -32,7 +32,7 @@ export default function ProductCard({ product, showDiscount }: ProductCardProps)
     <Link href={`/products/${product.id}`}>
       <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-lg transition-all duration-200 group hover:-translate-y-0.5">
         {/* Image Container */}
-        <div className="relative aspect-square bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
+        <div className="relative aspect-square bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden max-w-full">
           <img
             src={product.image}
             alt={product.name}
