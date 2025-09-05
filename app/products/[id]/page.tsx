@@ -1,5 +1,4 @@
 import Header from '@/components/header/header';
-import Header from '@/components/header/header';
 import ProductDetails from '@/components/products/product-details';
 import Footer from '@/components/footer/footer';
 import { products } from '@/lib/data/products';
