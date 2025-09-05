@@ -15,6 +15,9 @@ export default function ProfilePage() {
   const [isAddingAddress, setIsAddingAddress] = useState(false);
   const [editingAddressId, setEditingAddressId] = useState<string | null>(null);
   const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  const isDark = mounted ? theme === 'dark' : false;
 
   if (!user) return null;
 
