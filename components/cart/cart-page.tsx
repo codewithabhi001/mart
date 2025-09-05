@@ -10,6 +10,7 @@ import { useCart } from '@/lib/context/cart-context';
 import { availableCoupons } from '@/lib/data/coupons';
 import { toast } from 'sonner';
 import CouponSelector from './coupon-selector';
+import CartItemRow from './cart-item-row';
 
 export default function CartPage() {
   const { items, total, updateQuantity, removeItem } = useCart();
