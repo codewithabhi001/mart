@@ -44,7 +44,7 @@ export default function OrdersPage() {
       case 'delivered':
         return <CheckCircle className="w-5 h-5 text-green-500" />;
       case 'on-the-way':
-        return <Truck className="w-5 h-5 text-blue-500" />;
+        return <Truck className="w-5 h-5 text-green-500" />;
       case 'preparing':
         return <Clock className="w-5 h-5 text-orange-500" />;
       default:
