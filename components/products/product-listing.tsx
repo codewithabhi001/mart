@@ -78,7 +78,7 @@ export default function ProductListing() {
       <div className="container mx-auto px-4 py-8">
         <Alert className="max-w-md mx-auto">
           <AlertDescription className="text-center">
-            Sorry! We don't deliver to your location yet. We'll be there soon!
+            Sorry! We don&apos;t deliver to your location yet. We&apos;ll be there soon!
           </AlertDescription>
         </Alert>
       </div>

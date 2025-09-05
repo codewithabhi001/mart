@@ -242,7 +242,7 @@ export default function CheckoutPage() {
                   <div className="flex items-center space-x-2">
                     <CheckCircle className="w-4 h-4 text-green-600" />
                     <span className="text-sm text-green-800 font-medium">
-                      You're saving ₹40 on delivery!
+                      You&apos;re saving ₹40 on delivery!
                     </span>
                   </div>
                 </div>
