@@ -8,7 +8,8 @@ import { useParams } from 'next/navigation';
 
 export default function OrderTrackingClient() {
   const params = useParams();
-  const id = params?.id || '';
+  const rawId = params?.id;
+  const id = Array.isArray(rawId) ? rawId[0] : (rawId || '');
 
   return (
     <main className="min-h-screen bg-cream-light">
