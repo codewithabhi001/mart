@@ -6,7 +6,7 @@ import { categories } from '@/lib/data/products';
 
 export default function CategorySection() {
   return (
-    <section className="py-12 bg-white">
+    <section className="py-12 bg-transparent">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
           Shop by Category
