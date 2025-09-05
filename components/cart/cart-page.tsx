@@ -72,68 +72,12 @@ export default function CartPage() {
         {/* Cart Items */}
         <div className="lg:col-span-2 space-y-4">
           {items.map((item) => (
-            <div key={item.product.id} className="bg-white rounded-xl p-6 border card-hover">
-              <div className="flex gap-4">
-                <a href={`/products/${item.product.id}`} className="block w-20 h-20 shrink-0">
-                  <img
-                    src={item.product.image}
-                    alt={item.product.name}
-                    className="w-20 h-20 object-cover rounded-lg bg-gray-50"
-                  />
-                </a>
-
-                <div className="flex-1">
-                  <a href={`/products/${item.product.id}`} className="block">
-                    <h3 className="font-semibold text-gray-800 mb-1">{item.product.name}</h3>
-                  </a>
-                  <p className="text-sm text-gray-600 mb-2">{item.product.unit}</p>
-                  
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-2">
-                      <span className="font-bold text-lg">₹{item.product.price}</span>
-                      {item.product.originalPrice && (
-                        <span className="text-sm text-gray-400 line-through">
-                          ₹{item.product.originalPrice}
-                        </span>
-                      )}
-                    </div>
-
-                    <div className="flex items-center space-x-3">
-                      <div className="flex items-center border rounded-lg">
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
-                          disabled={item.quantity <= 1}
-                          className="h-8 w-8 p-0"
-                        >
-                          <Minus className="w-4 h-4" />
-                        </Button>
-                        <span className="px-3 py-1 font-medium">{item.quantity}</span>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
-                          disabled={item.quantity >= item.product.stock}
-                          className="h-8 w-8 p-0"
-                        >
-                          <Plus className="w-4 h-4" />
-                        </Button>
-                      </div>
-
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => removeItem(item.product.id)}
-                        className="text-red-600 hover:text-red-700 h-8 w-8 p-0"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <CartItemRow
+              key={item.product.id}
+              item={item}
+              updateQuantity={updateQuantity}
+              removeItem={removeItem}
+            />
           ))}
         </div>
 
