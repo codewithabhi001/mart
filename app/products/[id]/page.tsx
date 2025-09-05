@@ -18,11 +18,8 @@ export default function ProductPage({ params }: ProductPageProps) {
   );
 }
 
+import { products } from '@/lib/data/products';
+
 export function generateStaticParams() {
-  // Replace with your actual product IDs
-  return [
-    { id: '1' },
-    { id: '2' },
-    { id: '3' },
-  ];
+  return products.map((p) => ({ id: p.id }));
 }
