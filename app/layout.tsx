@@ -24,6 +24,24 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
+        {/* Early inline fetch override to block known injected analytics (FullStory) before they run */}
+        <script dangerouslySetInnerHTML={{__html: `(function(){
+          try{
+            var orig = window.fetch;
+            window.fetch = function(){
+              try{
+                var input = arguments[0];
+                var url = '';
+                if(typeof input === 'string') url = input;
+                else if(input && input.url) url = input.url;
+                if(url && (url.indexOf('fullstory.com')!==-1 || url.indexOf('edge.fullstory.com')!==-1 || url.indexOf('static.fullstory.com')!==-1)){
+                  return Promise.resolve(new Response(null,{status:204,statusText:'No Content (blocked)'}));
+                }
+              }catch(e){}
+              return orig.apply(this, arguments);
+            };
+          }catch(e){}
+        })();`}} />
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <FetchGuard />
           <AuthProvider>
