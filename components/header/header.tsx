@@ -149,15 +149,52 @@ export default function Header() {
                 onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
                 aria-label="Toggle theme"
               >
-                {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+                {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
               </Button>
 
               {/* Mobile Menu */}
-              <Button variant="ghost" size="sm" className="md:hidden p-3 hover:bg-gray-50 rounded-xl" aria-label="Open menu">
+              <Button variant="ghost" size="sm" className="md:hidden p-3 hover:bg-gray-50 rounded-xl" aria-label="Open menu" onClick={() => setShowMobileMenu(true)}>
                 <Menu className="w-5 h-5" />
               </Button>
             </div>
           </div>
+
+          {/* Mobile Menu Overlay */}
+          {showMobileMenu && (
+            <div className="fixed inset-0 z-60 md:hidden">
+              <div className="absolute inset-0 bg-black/50" onClick={() => setShowMobileMenu(false)} />
+              <div className="absolute top-0 right-0 w-72 h-full bg-white dark:bg-gray-900 shadow-lg p-6 overflow-auto">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-10 h-10 bg-gradient-to-r from-green-600 to-emerald-600 rounded-lg flex items-center justify-center text-white font-bold">IL</div>
+                    <div>
+                      <div className="font-semibold">ILB MART</div>
+                      <div className="text-xs text-gray-500">Delivering to {currentLocation?.area || 'your area'}</div>
+                    </div>
+                  </div>
+                  <Button variant="ghost" onClick={() => setShowMobileMenu(false)}>Close</Button>
+                </div>
+
+                <nav className="space-y-3">
+                  <a href="/" className="block py-3 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800">Home</a>
+                  <a href="/products" className="block py-3 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800">Products</a>
+                  <a href="/offers" className="block py-3 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800">Offers</a>
+                  <a href="/orders" className="block py-3 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800">Orders</a>
+                  <a href="/help" className="block py-3 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800">Help</a>
+                  <a href="/profile" className="block py-3 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800">Profile</a>
+                  <a href="/cart" className="block py-3 px-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800">Cart</a>
+                </nav>
+
+                <div className="mt-6">
+                  {user ? (
+                    <Button className="w-full bg-primary-green text-white" onClick={() => { setShowMobileMenu(false); window.location.href = '/profile'; }}>My Account</Button>
+                  ) : (
+                    <Button className="w-full bg-primary-green text-white" onClick={() => { setShowMobileMenu(false); window.location.href = '/login'; }}>Login</Button>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Mobile Location */}
           <div className="md:hidden pb-3">
