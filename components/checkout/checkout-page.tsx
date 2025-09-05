@@ -183,7 +183,7 @@ export default function CheckoutPage() {
               </Button>
 
               <div className="text-xs text-gray-500 text-center">
-                By placing this order, you agree to our Terms & Conditions
+                By placing this order , you agree to our Terms & Conditions
               </div>
             </CardContent>
           </Card>
