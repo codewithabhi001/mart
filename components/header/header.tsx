@@ -47,10 +47,10 @@ export default function Header() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
+              <div className="w-10 h-10 bg-gradient-to-r from-green-600 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg">
                 <Package className="w-6 h-6 text-white" />
               </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+              <span className="text-2xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
                 ILB MART
               </span>
             </Link>
@@ -59,7 +59,7 @@ export default function Header() {
             <div className="hidden md:flex items-center space-x-2">
               <Button
                 variant="ghost"
-                className="flex items-center space-x-2 text-gray-600 hover:text-purple-600 hover:bg-purple-50 rounded-xl px-4 py-2"
+                className="flex items-center space-x-2 text-gray-700 hover:text-green-600 hover:bg-green-50 rounded-xl px-4 py-2"
                 onClick={() => setIsLocationModalOpen(true)}
               >
                 <MapPin className="w-4 h-4" />
@@ -83,13 +83,13 @@ export default function Header() {
                   placeholder="Search for products..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-12 pr-12 h-12 bg-gray-50 border-gray-200 focus:border-purple-500 focus:ring-purple-500 rounded-xl"
+                  className="pl-12 pr-12 h-12 bg-gray-50 border-gray-200 focus:border-green-600 focus:ring-green-600 rounded-xl"
                 />
                 <Button
                   variant="ghost"
                   size="sm"
                   className={`absolute right-2 top-1/2 transform -translate-y-1/2 h-8 w-8 p-0 rounded-lg ${
-                    isListening ? 'text-red-500 animate-pulse bg-red-50' : 'text-gray-400 hover:text-purple-600 hover:bg-purple-50'
+                    isListening ? 'text-red-500 animate-pulse bg-red-50' : 'text-gray-400 hover:text-green-600 hover:bg-green-50'
                   }`}
                   onClick={startVoiceSearch}
                 >
@@ -115,7 +115,7 @@ export default function Header() {
                   <ShoppingCart className="w-5 h-5" />
                   {itemCount > 0 && (
                     <Badge 
-                      className="absolute -top-1 -right-1 bg-gradient-to-r from-purple-600 to-blue-600 text-white min-w-[20px] h-5 rounded-full text-xs flex items-center justify-center font-semibold"
+                      className="absolute -top-1 -right-1 bg-gradient-to-r from-green-600 to-emerald-600 text-white min-w-[20px] h-5 rounded-full text-xs flex items-center justify-center font-semibold"
                     >
                       {itemCount}
                     </Badge>
@@ -128,15 +128,26 @@ export default function Header() {
                 <UserMenu />
               ) : (
                 <Link href="/login">
-                  <Button className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-xl px-6 font-semibold">
+                  <Button className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white rounded-xl px-6 font-semibold">
                     <User className="w-4 h-4 mr-2" />
                     Login
                   </Button>
                 </Link>
               )}
 
+              {/* Theme Toggle */}
+              <Button
+                variant="ghost"
+                size="sm"
+                className="p-3 hover:bg-green-50 rounded-xl"
+                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                aria-label="Toggle theme"
+              >
+                {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              </Button>
+
               {/* Mobile Menu */}
-              <Button variant="ghost" size="sm" className="md:hidden p-3 hover:bg-gray-50 rounded-xl">
+              <Button variant="ghost" size="sm" className="md:hidden p-3 hover:bg-gray-50 rounded-xl" aria-label="Open menu">
                 <Menu className="w-5 h-5" />
               </Button>
             </div>
