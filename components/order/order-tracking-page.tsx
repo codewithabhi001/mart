@@ -224,20 +224,27 @@ export default function OrderTrackingPage({ orderId }: OrderTrackingPageProps) {
                 <CardTitle>Order Items</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                {(demoOrder?.items || []).map((item, index) => (
-                  <div key={index} className="flex items-center space-x-3 p-3 bg-gray-50 rounded-xl">
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="w-12 h-12 object-cover rounded-lg"
-                    />
-                    <div className="flex-1">
-                      <p className="font-medium text-sm">{item.name}</p>
-                      <p className="text-xs text-gray-600">Qty: {item.quantity}</p>
+                {(demoOrder?.items || []).map((item, index) => {
+                  const prod = (item && (item.product || item)) || {};
+                  const name = prod.name || item.name || 'Item';
+                  const image = prod.image || item.image || '';
+                  const qty = item.quantity || item.qty || 1;
+                  const price = prod.price || item.price || 0;
+                  return (
+                    <div key={index} className="flex items-center space-x-3 p-3 bg-gray-50 rounded-xl">
+                      <img
+                        src={image}
+                        alt={name}
+                        className="w-12 h-12 object-cover rounded-lg"
+                      />
+                      <div className="flex-1">
+                        <p className="font-medium text-sm">{name}</p>
+                        <p className="text-xs text-gray-600">Qty: {qty}</p>
+                      </div>
+                      <span className="font-semibold">₹{price * qty}</span>
                     </div>
-                    <span className="font-semibold">₹{item.price * item.quantity}</span>
-                  </div>
-                ))}
+                  );
+                })}
                 <div className="border-t pt-3 flex justify-between font-bold text-lg">
                   <span>Total</span>
                   <span>₹{demoOrder?.total ?? '—'}</span>
